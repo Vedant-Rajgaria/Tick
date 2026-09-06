@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tic.internal/schemas/activity_batch.schema.json",
+  "title": "TIC Activity Batch",
+  "description": "Payload contract for POST /api/v1/activity/batch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["device_id", "period_start", "period_end", "applications", "input_activity"],
+  "properties": {
+    "device_id": { "type": "integer", "minimum": 1 },
+    "period_start": { "type": "string", "format": "date-time" },
+    "period_end": { "type": "string", "format": "date-time" },
+
+    "applications": {
+      "type": "array",
+      "minItems": 0,
+      "items": { "$ref": "#/$defs/applicationSession" }
+    },
+
+    "context_switches": { "$ref": "#/$defs/contextSwitches" },
+
+    "input_activity": { "$ref": "#/$defs/inputActivity" },
+
+    "system_events": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/systemEvent" }
+    }
+  },
+
+  "$defs": {
+    "resourceUsage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["avg_cpu_percent", "max_cpu_percent", "avg_gpu_percent", "max_gpu_percent", "sample_count"],
+      "properties": {
+        "avg_cpu_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "max_cpu_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "avg_gpu_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "max_gpu_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "sample_count": { "type": "integer", "minimum": 1 }
+      }
+    },
+
+    "browserTab": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain", "start_time", "end_time", "duration_seconds"],
+      "properties": {
+        "domain": { "type": "string", "minLength": 1, "maxLength": 253 },
+        "start_time": { "type": "string", "format": "date-time" },
+        "end_time": { "type": "string", "format": "date-time" },
+        "duration_seconds": { "type": "integer", "minimum": 0 }
+      }
+    },
+
+    "applicationSession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "process_name", "category", "start_time", "end_time", "duration_seconds"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "process_name": { "type": "string", "minLength": 1 },
+        "category": { "type": "string", "minLength": 1 },
+        "start_time": { "type": "string", "format": "date-time" },
+        "end_time": { "type": "string", "format": "date-time" },
+        "duration_seconds": { "type": "integer", "minimum": 0 },
+        "resource_usage": { "$ref": "#/$defs/resourceUsage" },
+        "browser_tabs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/browserTab" }
+        }
+      },
+      "if": {
+        "properties": { "category": { "const": "browser" } },
+        "required": ["category"]
+      },
+      "else": {
+        "properties": {
+          "browser_tabs": { "maxItems": 0 }
+        }
+      }
+    },
+
+    "contextSwitchEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "from", "to", "timestamp"],
+      "properties": {
+        "type": { "type": "string", "enum": ["APP", "TAB"] },
+        "from": { "type": "string", "minLength": 1 },
+        "to": { "type": "string", "minLength": 1 },
+        "timestamp": { "type": "string", "format": "date-time" }
+      }
+    },
+
+    "contextSwitches": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["app_switch_count", "tab_switch_count", "events"],
+      "properties": {
+        "app_switch_count": { "type": "integer", "minimum": 0 },
+        "tab_switch_count": { "type": "integer", "minimum": 0 },
+        "events": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/contextSwitchEvent" }
+        }
+      }
+    },
+
+    "inputActivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["keystroke_count", "mouse_event_count", "active_seconds", "idle_seconds"],
+      "properties": {
+        "keystroke_count": { "type": "integer", "minimum": 0 },
+        "mouse_event_count": { "type": "integer", "minimum": 0 },
+        "active_seconds": { "type": "integer", "minimum": 0 },
+        "idle_seconds": { "type": "integer", "minimum": 0 }
+      }
+    },
+
+    "systemEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["timestamp", "type"],
+      "properties": {
+        "timestamp": { "type": "string", "format": "date-time" },
+        "type": { "type": "string", "enum": ["LOCK", "UNLOCK", "SLEEP", "WAKE", "INPUT_ACTIVITY"] }
+      }
+    }
+  }
+}

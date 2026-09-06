@@ -1,0 +1,16 @@
+# --- Backend API (Module C & D) ---
+fastapi
+uvicorn
+pydantic
+
+# --- Database & Config ---
+SQLAlchemy
+psycopg2-binary
+python-dotenv
+
+# --- Mock Server (Unblocks Frontend) ---
+Flask
+Flask-Cors
+
+# --- Contract Testing ---
+jsonschema

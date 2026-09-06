@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Workspace — TICK</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-mark">T</div>
+        <span class="brand-title">TICK</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link active">
+          <span>Overview</span>
+        </a>
+        <a href="#workPulseSection" class="nav-link">
+          <span>My Activity</span>
+        </a>
+        <a href="#myTasksSection" class="nav-link">
+          <span>My Tasks</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <div style="padding: 0.35rem 0.75rem; font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">
+          Account
+        </div>
+        <a href="#" class="nav-link" style="color: #6B7280;">
+          <span>Profile</span>
+        </a>
+        <a href="../index.html" class="nav-link" style="color: #6B7280;">
+          <span>Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-meta-role">Personal Workspace</div>
+        <div class="user-meta-name">Alex Johnson</div>
+        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;">Software Developer</div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="top-header">
+        <div class="header-title">My Workday</div>
+        <div class="header-right">
+          <span class="header-date">Sep 6, 2026</span>
+          <span class="header-badge">Employee</span>
+        </div>
+      </header>
+
+      <div class="page-body">
+        
+        <!-- Calm Employee Greeting (Section 29) -->
+        <div class="page-header-block">
+          <h1 class="page-headline">Good morning, Alex.</h1>
+          <p class="page-subheadline">Here's your work cadence and active commitments for today.</p>
+        </div>
+
+        <!-- 4 Small Metrics (Section 29) -->
+        <div class="metrics-row">
+          <div class="metric-box">
+            <div class="metric-number">5h 42m</div>
+            <div class="metric-label">Useful Work</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-number">48m</div>
+            <div class="metric-label">Idle / Reading Time</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-number" id="empAssignedCount">4</div>
+            <div class="metric-label">Assigned Tasks</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-number" style="color: #059669;" id="empCompletedCount">2</div>
+            <div class="metric-label">Completed Tasks</div>
+          </div>
+        </div>
+
+        <!-- SIGNATURE EXPERIENCE 1: WORK PULSE (Section 29) -->
+        <section class="content-card" id="workPulseSection">
+          <div class="card-header-bar">
+            <div>
+              <h2 class="card-heading">Work Pulse</h2>
+              <p class="card-subheading">Your recorded workday from 09:00 to 18:00. Hover over any block to see session details.</p>
+            </div>
+            <span class="status-pill normal">Continuous Session</span>
+          </div>
+
+          <div class="card-body-block">
+            <div class="work-pulse-container">
+              <div class="work-pulse-timeline">
+                <span>09:00</span>
+                <span>11:00</span>
+                <span>13:00</span>
+                <span>15:00</span>
+                <span>17:00</span>
+                <span>18:00</span>
+              </div>
+
+              <!-- Segmented Bar -->
+              <div class="work-pulse-bar" id="empWorkPulseBar">
+                <!-- Built via dashboard.js -->
+              </div>
+
+              <!-- Tooltip -->
+              <div class="pulse-tooltip" id="empPulseTooltip">
+                <div class="pulse-tooltip-title" id="empTooltipApp">VS Code</div>
+                <div class="pulse-tooltip-meta" id="empTooltipMeta">10:12 AM – 11:36 AM (1h 24m)</div>
+              </div>
+
+              <!-- Legend -->
+              <div class="pulse-legend">
+                <div><span class="legend-dot" style="background-color: #4F46E5;"></span>Focus / Development</div>
+                <div><span class="legend-dot" style="background-color: #2563EB;"></span>Active Work / Communication</div>
+                <div><span class="legend-dot" style="background-color: #E5E7EB;"></span>Idle / Reading Interval</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- USEFUL WORK GRAPH (Section 19 / 29) -->
+        <section class="content-card">
+          <div class="card-header-bar">
+            <div>
+              <h2 class="card-heading">Useful Work Graph</h2>
+              <p class="card-subheading">Work intensity baseline across today's sessions.</p>
+            </div>
+          </div>
+          <div class="card-body-block">
+            <div style="height: 200px; width: 100%;">
+              <canvas id="empUsefulWorkChart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- APPLICATION USAGE (Section 29) -->
+        <section class="content-card">
+          <div class="card-header-bar">
+            <div>
+              <h2 class="card-heading">Application Usage</h2>
+              <p class="card-subheading">Active time spent across developer applications today.</p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="clean-table">
+              <thead>
+                <tr>
+                  <th>Application</th>
+                  <th>Duration</th>
+                  <th>Category</th>
+                  <th>Last Active</th>
+                </tr>
+              </thead>
+              <tbody id="empAppUsageTbody">
+                <!-- Built via dashboard.js -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- MY TASKS & TASK COMPLETION FLOW (Section 22 & 23) -->
+        <section class="content-card" id="myTasksSection">
+          <div class="card-header-bar">
+            <div>
+              <h2 class="card-heading">My Tasks</h2>
+              <p class="card-subheading">Your assigned deliverables. Mark items as completed when finished to record delivery time.</p>
+            </div>
+          </div>
+
+          <div class="card-body-block" id="myTasksContainer">
+            <!-- Dynamically populated via tasks.js -->
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- TASK COMPLETION CONFIRMATION MODAL (Section 23) -->
+  <div class="modal-overlay" id="taskCompleteModal">
+    <div class="modal-card">
+      <h3 class="modal-title">Complete task?</h3>
+      <p class="modal-desc" id="modalTaskDesc">
+        Are you sure you have completed "Build Payment API"?
+      </p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="cancelCompleteBtn">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" id="confirmCompleteBtn" style="background-color: #059669;">
+          Confirm Completion
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/tasks.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# TICK desktop agent dependencies.
+# Kept separate from the root requirements.txt because pywin32 is
+# Windows-only and would break `pip install -r requirements.txt` for anyone
+# setting up the backend on macOS/Linux. Install this file only on the
+# machine actually running the desktop agent.
+
+pynput
+psutil
+pywin32
+requests
+python-dotenv

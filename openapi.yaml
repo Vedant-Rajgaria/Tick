@@ -30,9 +30,35 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/LoginResponse" }
 
+  /auth/refresh:
+    post:
+      summary: Exchange a refresh token for a new access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refresh_token]
+              properties:
+                refresh_token: { type: string }
+      responses:
+        "200":
+          description: New access token issued
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [access_token]
+                properties:
+                  access_token: { type: string }
+        "401":
+          description: Refresh token invalid or expired
+
   /agent/register:
     post:
-      summary: Register a desktop agent/device
+      summary: Register a desktop agent/device for the authenticated employee
+      security: [{ bearerAuth: [] }]
       requestBody:
         required: true
         content:
@@ -59,6 +85,7 @@ paths:
   /activity/batch:
     post:
       summary: Ingest an aggregated activity batch from the desktop agent
+      security: [{ bearerAuth: [] }]
       requestBody:
         required: true
         content:
@@ -256,9 +283,10 @@ components:
   schemas:
     LoginResponse:
       type: object
-      required: [access_token, user]
+      required: [access_token, refresh_token, user]
       properties:
         access_token: { type: string }
+        refresh_token: { type: string }
         user:
           type: object
           properties:

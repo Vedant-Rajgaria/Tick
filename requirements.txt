@@ -2,11 +2,16 @@
 fastapi
 uvicorn
 pydantic
+email-validator
 
 # --- Database & Config ---
 SQLAlchemy
 psycopg2-binary
 python-dotenv
+
+# --- Auth (bcrypt password hashing + JWT access/refresh tokens) ---
+bcrypt
+PyJWT
 
 # --- Mock Server (Unblocks Frontend) ---
 Flask

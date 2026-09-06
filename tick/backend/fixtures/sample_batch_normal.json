@@ -1,0 +1,34 @@
+{
+  "device_id": 42,
+  "period_start": "2026-09-06T09:00:00Z",
+  "period_end": "2026-09-06T09:05:00Z",
+  "applications": [
+    {
+      "name": "VS Code",
+      "process_name": "Code.exe",
+      "category": "development",
+      "start_time": "2026-09-06T09:00:00Z",
+      "end_time": "2026-09-06T09:05:00Z",
+      "duration_seconds": 300,
+      "resource_usage": {
+        "avg_cpu_percent": 12.5,
+        "max_cpu_percent": 30.0,
+        "avg_gpu_percent": 1.5,
+        "max_gpu_percent": 4.0,
+        "sample_count": 30
+      }
+    }
+  ],
+  "context_switches": {
+    "app_switch_count": 0,
+    "tab_switch_count": 0,
+    "events": []
+  },
+  "input_activity": {
+    "keystroke_count": 540,
+    "mouse_event_count": 65,
+    "active_seconds": 280,
+    "idle_seconds": 20
+  },
+  "system_events": []
+}

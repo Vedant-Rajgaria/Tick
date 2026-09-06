@@ -1,0 +1,21 @@
+{
+  "device_id": 42,
+  "period_start": "2026-09-06T10:00:00Z",
+  "period_end": "2026-09-06T10:30:00Z",
+  "applications": [],
+  "context_switches": {
+    "app_switch_count": 0,
+    "tab_switch_count": 0,
+    "events": []
+  },
+  "input_activity": {
+    "keystroke_count": 0,
+    "mouse_event_count": 0,
+    "active_seconds": 0,
+    "idle_seconds": 1800
+  },
+  "system_events": [
+    { "timestamp": "2026-09-06T10:00:00Z", "type": "LOCK" },
+    { "timestamp": "2026-09-06T10:30:00Z", "type": "UNLOCK" }
+  ]
+}

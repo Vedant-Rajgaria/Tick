@@ -1,0 +1,40 @@
+{
+  "task_status": ["TODO", "IN_PROGRESS", "COMPLETED", "BLOCKED", "OVERDUE"],
+  "task_priority": ["LOW", "MEDIUM", "HIGH", "CRITICAL"],
+  "task_complexity": ["LOW", "MEDIUM", "HIGH"],
+  "user_role": ["EMPLOYEE", "MANAGER", "ADMIN"],
+  "device_os": ["WINDOWS", "MACOS", "LINUX"],
+  "system_event_type": ["LOCK", "UNLOCK", "SLEEP", "WAKE", "INPUT_ACTIVITY"],
+  "context_switch_type": ["APP", "TAB"],
+  "application_category": [
+    "development",
+    "browser",
+    "communication",
+    "data_office",
+    "documentation",
+    "presentation",
+    "other"
+  ],
+  "notification_type": [
+    "WORKLOAD_HIGH",
+    "WORKLOAD_OVERLOADED",
+    "TASK_DEADLINE",
+    "TASK_ASSIGNED",
+    "TASK_COMPLETED"
+  ],
+  "workload_thresholds_percent": {
+    "low_max": 50,
+    "normal_max": 80,
+    "high_max": 100
+  },
+  "recommendation_weights": {
+    "skill_match": 0.35,
+    "availability": 0.30,
+    "efficiency": 0.20,
+    "deadline_fit": 0.15
+  },
+  "batch_defaults": {
+    "batch_interval_seconds": 180,
+    "inactivity_threshold_seconds": 300
+  }
+}

@@ -21,7 +21,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.database import Base
+from .database import Base
 
 
 class Organization(Base):
@@ -52,6 +52,7 @@ class User(Base):
     password_hash: Mapped[str] = mapped_column(String, nullable=False)
     role: Mapped[str] = mapped_column(String, nullable=False)  # EMPLOYEE | MANAGER | ADMIN
     status: Mapped[str] = mapped_column(String, nullable=False, default="ACTIVE")
+    skills: Mapped[list | None] = mapped_column(JSON, default=list)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
 
     devices: Mapped[list["Device"]] = relationship(back_populates="user")
@@ -180,5 +181,41 @@ class Task(Base):
     status: Mapped[str] = mapped_column(String, nullable=False, default="TODO")
     priority: Mapped[str | None] = mapped_column(String)
     deadline: Mapped[date | None] = mapped_column(Date)
+    required_skills: Mapped[list | None] = mapped_column(JSON, default=list)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class Recommendation(Base):
+    __tablename__ = "recommendations"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    task_id: Mapped[int] = mapped_column(ForeignKey("tasks.id"), nullable=False)
+    employee_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    score: Mapped[float] = mapped_column(Numeric(5, 2), nullable=False)
+    skill_score: Mapped[float | None] = mapped_column(Numeric(5, 2))
+    availability_score: Mapped[float | None] = mapped_column(Numeric(5, 2))
+    efficiency_score: Mapped[float | None] = mapped_column(Numeric(5, 2))
+    workload_score: Mapped[float | None] = mapped_column(Numeric(5, 2))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+
+class WorkMetric(Base):
+    __tablename__ = "work_metrics"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    date: Mapped[date] = mapped_column(Date, nullable=False)
+    active_seconds: Mapped[int] = mapped_column(Integer, default=0)
+    idle_seconds: Mapped[int] = mapped_column(Integer, default=0)
+    total_work_seconds: Mapped[int] = mapped_column(Integer, default=0)
+    app_switch_count: Mapped[int] = mapped_column(Integer, default=0)
+    tab_switch_count: Mapped[int] = mapped_column(Integer, default=0)
+    keystroke_count: Mapped[int] = mapped_column(Integer, default=0)
+    mouse_event_count: Mapped[int] = mapped_column(Integer, default=0)
+    avg_cpu_percent: Mapped[float | None] = mapped_column(Numeric(5, 2))
+    avg_gpu_percent: Mapped[float | None] = mapped_column(Numeric(5, 2))
+    session_count: Mapped[int] = mapped_column(Integer, default=0)
+    average_session_seconds: Mapped[int] = mapped_column(Integer, default=0)
+    tasks_completed: Mapped[int] = mapped_column(Integer, default=0)
+    tasks_overdue: Mapped[int] = mapped_column(Integer, default=0)

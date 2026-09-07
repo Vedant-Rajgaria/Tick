@@ -34,18 +34,15 @@
         <div style="padding: 0.35rem 0.75rem; font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">
           Account
         </div>
-        <a href="#" class="nav-link" style="color: #6B7280;">
-          <span>Profile</span>
-        </a>
-        <a href="../index.html" class="nav-link" style="color: #6B7280;">
+        <a href="login.html" class="nav-link" id="empLogoutLink" style="color: #6B7280;">
           <span>Logout</span>
         </a>
       </nav>
 
       <div class="sidebar-footer">
-        <div class="user-meta-role">Personal Workspace</div>
-        <div class="user-meta-name">Alex Johnson</div>
-        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;">Software Developer</div>
+        <div class="user-meta-role" id="empSidebarRole">Personal Workspace</div>
+        <div class="user-meta-name" id="empSidebarName">Loading...</div>
+        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;" id="empSidebarMeta"></div>
       </div>
     </aside>
 
@@ -54,36 +51,36 @@
       <header class="top-header">
         <div class="header-title">My Workday</div>
         <div class="header-right">
-          <span class="header-date">Sep 6, 2026</span>
+          <span class="header-date" id="topHeaderDate"></span>
           <span class="header-badge">Employee</span>
         </div>
       </header>
 
       <div class="page-body">
         
-        <!-- Calm Employee Greeting (Section 29) -->
+        <!-- Employee Greeting -->
         <div class="page-header-block">
-          <h1 class="page-headline">Good morning, Alex.</h1>
+          <h1 class="page-headline" id="empGreeting">Good morning</h1>
           <p class="page-subheadline">Here's your work cadence and active commitments for today.</p>
         </div>
 
-        <!-- 4 Small Metrics (Section 29) -->
+        <!-- 4 Metrics -->
         <div class="metrics-row">
           <div class="metric-box">
-            <div class="metric-number">5h 42m</div>
+            <div class="metric-number" id="empUsefulWork">0m</div>
             <div class="metric-label">Useful Work</div>
           </div>
           <div class="metric-box">
-            <div class="metric-number">48m</div>
+            <div class="metric-number" id="empIdleTime">0m</div>
             <div class="metric-label">Idle / Reading Time</div>
           </div>
           <div class="metric-box">
-            <div class="metric-number" id="empAssignedCount">4</div>
-            <div class="metric-label">Assigned Tasks</div>
+            <div class="metric-number" id="empSessionCount">0</div>
+            <div class="metric-label">Tracked Sessions</div>
           </div>
           <div class="metric-box">
-            <div class="metric-number" style="color: #059669;" id="empCompletedCount">2</div>
-            <div class="metric-label">Completed Tasks</div>
+            <div class="metric-number" style="color: #059669;" id="empAppCount">0</div>
+            <div class="metric-label">Active Applications</div>
           </div>
         </div>
 
@@ -205,7 +202,6 @@
     </div>
   </div>
 
-  <script src="js/app.js"></script>
   <script src="js/dashboard.js"></script>
   <script src="js/tasks.js"></script>
 </body>

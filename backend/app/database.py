@@ -6,7 +6,7 @@ schema.sql via scripts/setup_local_db.sh remains the source of truth for DDL.
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
-from app.config import settings
+from .config import settings
 
 engine = create_engine(settings.DATABASE_URL, pool_pre_ping=True, future=True)
 

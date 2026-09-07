@@ -21,13 +21,13 @@
 
       <form id="employeeLoginForm">
         <div class="form-group">
-          <label class="form-label" for="employeeIdInput">Employee ID / Email</label>
-          <input type="text" class="form-input" id="employeeIdInput" value="EMP-1024" placeholder="EMP-1024 or alex@example.com" required />
+          <label class="form-label" for="employeeIdInput">Email</label>
+          <input type="email" class="form-input" id="employeeIdInput" placeholder="employee@company.com" required />
         </div>
 
         <div class="form-group">
           <label class="form-label" for="employeePassword">Password</label>
-          <input type="password" class="form-input" id="employeePassword" value="••••••••••••" required />
+          <input type="password" class="form-input" id="employeePassword" placeholder="Enter password" required />
         </div>
 
         <div style="margin-top: 1.5rem;">
@@ -35,6 +35,8 @@
             Login
           </button>
         </div>
+
+        <div id="loginErrorMsg" style="display: none; margin-top: 1rem; padding: 0.75rem 1rem; background-color: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 6px; font-size: 0.8125rem; color: #B91C1C; font-weight: 500; text-align: center;"></div>
       </form>
 
       <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #E5E7EB;">
@@ -45,7 +47,6 @@
     </div>
   </main>
 
-  <script src="js/app.js"></script>
   <script src="js/login.js"></script>
 </body>
 </html>

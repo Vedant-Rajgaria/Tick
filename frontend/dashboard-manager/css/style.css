@@ -958,6 +958,312 @@ input, select, textarea {
 }
 
 /* ==========================================================================
+   Decision-Oriented Task Assignment UI Enhancements
+   ========================================================================== */
+.decision-card {
+  border: 1px solid #E5E7EB;
+  border-radius: var(--radius-md);
+  background-color: #FFFFFF;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease;
+}
+
+.decision-card.warning-state {
+  border-color: #F59E0B;
+}
+
+.decision-card.feasible-state {
+  border-color: #10B981;
+}
+
+.decision-status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.decision-status-tag.warning {
+  background-color: #FEF3C7;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.decision-status-tag.feasible {
+  background-color: #ECFDF5;
+  color: #047857;
+  border: 1px solid #A7F3D0;
+}
+
+.decision-status-tag.ineligible {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+  border: 1px solid #FECACA;
+}
+
+.overall-fit-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.overall-fit-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.overall-fit-score-val {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #111827;
+}
+
+.overall-fit-score-val span.scale {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #9CA3AF;
+}
+
+/* Primary Capacity Box */
+.capacity-primary-box {
+  background-color: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.15rem;
+  margin: 1.15rem 0;
+}
+
+.capacity-primary-box.overload {
+  background-color: #FFFBEB;
+  border-color: #FDE68A;
+}
+
+.capacity-primary-box.healthy {
+  background-color: #F0FDF4;
+  border-color: #BBF7D0;
+}
+
+.capacity-status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.capacity-headline {
+  font-size: 0.925rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.capacity-headline.overload {
+  color: #B45309;
+}
+
+.capacity-headline.healthy {
+  color: #047857;
+}
+
+.capacity-sub-effort {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #4B5563;
+}
+
+.capacity-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.capacity-stat-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.75rem;
+}
+
+.capacity-stat-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #6B7280;
+  letter-spacing: 0.04em;
+}
+
+.capacity-stat-val {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 1px;
+}
+
+.capacity-stat-sub {
+  font-size: 0.72rem;
+  color: #6B7280;
+}
+
+/* Capacity Progress Meter */
+.capacity-meter-wrap {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  background-color: #E5E7EB;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0.5rem 0 0.35rem 0;
+}
+
+.capacity-meter-current {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #3B82F6;
+  border-radius: 6px 0 0 6px;
+}
+
+.capacity-meter-added {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #10B981;
+}
+
+.capacity-meter-added.overload {
+  background-color: #F59E0B;
+}
+
+.capacity-meter-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: #6B7280;
+}
+
+/* Actionable Signal Chips */
+.action-signals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.action-signal-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: #F3F4F6;
+  color: #374151;
+  border: 1px solid #E5E7EB;
+}
+
+.action-signal-pill.green {
+  background: #ECFDF5;
+  color: #047857;
+  border-color: #A7F3D0;
+}
+
+.action-signal-pill.amber {
+  background: #FFFBEB;
+  color: #B45309;
+  border-color: #FDE68A;
+}
+
+.action-signal-pill.red {
+  background: #FEF2F2;
+  color: #B91C1C;
+  border-color: #FECACA;
+}
+
+/* Collapsible Disclosures */
+.disclosure-block {
+  margin-top: 1rem;
+  border: 1px solid #E5E7EB;
+  border-radius: var(--radius-sm);
+  background-color: #FAFAFA;
+}
+
+.disclosure-summary {
+  padding: 0.6rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #4B5563;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.disclosure-summary:hover {
+  color: #111827;
+  background-color: #F3F4F6;
+}
+
+.disclosure-content {
+  padding: 0.85rem;
+  border-top: 1px solid #E5E7EB;
+  font-size: 0.75rem;
+  color: #4B5563;
+  background-color: #FFFFFF;
+}
+
+/* Capacity Warning Confirmation State */
+.capacity-confirm-box {
+  background-color: #FFFBEB;
+  border: 2px solid #F59E0B;
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  margin-top: 1rem;
+}
+
+.capacity-confirm-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.925rem;
+  font-weight: 700;
+  color: #92400E;
+  margin-bottom: 0.4rem;
+}
+
+.capacity-confirm-body {
+  font-size: 0.8125rem;
+  color: #78350F;
+  margin-bottom: 0.9rem;
+  line-height: 1.4;
+}
+
+.capacity-confirm-buttons {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+}
+
+/* ==========================================================================
    Buttons & Inputs
    ========================================================================== */
 .btn {
@@ -1216,4 +1522,110 @@ input, select, textarea {
   border-radius: var(--radius-lg);
   padding: 2rem;
   box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   Fixed Overlay Modal Styles (Delete Confirmation & Dialogs)
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(15, 23, 42, 0.65) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  z-index: 99999 !important;
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 1.5rem !important;
+  box-sizing: border-box !important;
+}
+
+.modal-backdrop.active {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.modal-dialog {
+  background: #FFFFFF !important;
+  border-radius: 12px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid #E5E7EB !important;
+  width: 100% !important;
+  max-width: 480px !important;
+  max-height: 90vh !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  margin: auto !important;
+  animation: modalScaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-header {
+  padding: 1.25rem 1.5rem !important;
+  border-bottom: 1px solid #E5E7EB !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.modal-title {
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.modal-close {
+  background: none !important;
+  border: none !important;
+  color: #6B7280 !important;
+  font-size: 1.5rem !important;
+  line-height: 1 !important;
+  padding: 0.25rem 0.5rem !important;
+  cursor: pointer !important;
+  border-radius: 4px !important;
+  transition: color 0.15s ease, background-color 0.15s ease !important;
+}
+
+.modal-close:hover {
+  color: #111827 !important;
+  background: #F3F4F6 !important;
+}
+
+.modal-body {
+  padding: 1.5rem !important;
+  color: #374151 !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.5 !important;
+}
+
+.modal-footer {
+  padding: 1rem 1.5rem !important;
+  background: #F9FAFB !important;
+  border-top: 1px solid #E5E7EB !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0.75rem !important;
 }

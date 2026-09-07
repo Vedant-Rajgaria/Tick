@@ -4,9 +4,9 @@ from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.database import get_db
-from app.deps import get_current_user
-from app.models import (
+from ..database import get_db
+from ..deps import get_current_user
+from ..models import (
     User,
     Device,
     Application,
@@ -15,14 +15,15 @@ from app.models import (
     BrowserTabSession,
     ContextSwitchEvent,
     InputActivityWindow,
+    WorkSession,
 )
-from app.schemas import (
+from ..schemas import (
     AgentRegisterRequest,
     AgentRegisterResponse,
     ActivityBatchResponse,
     ActivityBatchProcessed,
 )
-from app.activity_validation import validate_activity_batch
+from ..activity_validation import validate_activity_batch, validate_activity_batch_domain
 
 router = APIRouter(tags=["agent"])
 
@@ -81,14 +82,19 @@ def _get_or_create_application(db: Session, name: str, process_name: str, catego
 
 
 @router.post("/activity/batch", response_model=ActivityBatchResponse)
+@router.post("/agent/events/batch", response_model=ActivityBatchResponse)
 def ingest_activity_batch(
     payload: dict,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    errors = validate_activity_batch(payload)
-    if errors:
-        raise HTTPException(status_code=422, detail={"schema_errors": errors})
+    schema_errors = validate_activity_batch(payload)
+    if schema_errors:
+        raise HTTPException(status_code=422, detail={"schema_errors": schema_errors})
+
+    domain_errors = validate_activity_batch_domain(payload)
+    if domain_errors:
+        raise HTTPException(status_code=422, detail={"domain_errors": domain_errors})
 
     device = db.get(Device, payload["device_id"])
     if device is None or device.user_id != current_user.id:
@@ -98,6 +104,46 @@ def ingest_activity_batch(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="device_id does not belong to the authenticated user",
         )
+
+    # -----------------------------------------------------------------------
+    # Backend Stage 2 — Session Reconstruction (T_gap = 15 minutes)
+    # -----------------------------------------------------------------------
+    period_start_dt = datetime.fromisoformat(payload["period_start"].replace("Z", "+00:00"))
+    period_end_dt = datetime.fromisoformat(payload["period_end"].replace("Z", "+00:00"))
+    input_activity_payload = payload.get("input_activity", {})
+    batch_active_sec = input_activity_payload.get("active_seconds", 0)
+    batch_idle_sec = input_activity_payload.get("idle_seconds", 0)
+
+    T_GAP_SECONDS = 15.0 * 60.0  # 15 minutes
+    latest_session = (
+        db.query(WorkSession)
+        .filter(WorkSession.user_id == current_user.id, WorkSession.device_id == device.id)
+        .order_by(WorkSession.end_time.desc())
+        .first()
+    )
+
+    current_work_session = None
+    if latest_session and latest_session.end_time:
+        delta_t = (period_start_dt - latest_session.end_time).total_seconds()
+        if 0 <= delta_t <= T_GAP_SECONDS:
+            # Delta t <= T_gap => Coalesce into existing session
+            latest_session.end_time = max(latest_session.end_time, period_end_dt)
+            latest_session.active_seconds += batch_active_sec
+            latest_session.idle_seconds += batch_idle_sec
+            current_work_session = latest_session
+
+    if current_work_session is None:
+        # Delta t > T_gap (or first session) => New session boundary
+        current_work_session = WorkSession(
+            user_id=current_user.id,
+            device_id=device.id,
+            start_time=period_start_dt,
+            end_time=period_end_dt,
+            active_seconds=batch_active_sec,
+            idle_seconds=batch_idle_sec,
+        )
+        db.add(current_work_session)
+        db.flush()
 
     application_session_count = 0
     browser_tab_count = 0
@@ -113,6 +159,7 @@ def ingest_activity_batch(
         session = ApplicationSession(
             user_id=current_user.id,
             device_id=device.id,
+            work_session_id=current_work_session.id,
             application_id=application.id,
             start_time=app_payload["start_time"],
             end_time=app_payload["end_time"],
@@ -160,6 +207,7 @@ def ingest_activity_batch(
             ContextSwitchEvent(
                 user_id=current_user.id,
                 device_id=device.id,
+                work_session_id=current_work_session.id,
                 switch_type=event["type"],
                 from_context=event["from"],
                 to_context=event["to"],

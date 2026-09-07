@@ -37,18 +37,15 @@
         <div style="padding: 0.35rem 0.75rem; font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">
           System
         </div>
-        <a href="#" class="nav-link" style="color: #6B7280;">
-          <span>Settings</span>
-        </a>
-        <a href="../index.html" class="nav-link" style="color: #6B7280;">
+        <a href="login.html" class="nav-link" id="logoutLink" style="color: #6B7280;">
           <span>Logout</span>
         </a>
       </nav>
 
       <div class="sidebar-footer">
-        <div class="user-meta-role">Admin Workspace</div>
-        <div class="user-meta-name">Elena Rostova</div>
-        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;">Engineering Lead</div>
+        <div class="user-meta-role" id="adminSidebarRole">Admin Workspace</div>
+        <div class="user-meta-name" id="adminSidebarName">Loading...</div>
+        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;" id="adminSidebarMeta"></div>
       </div>
     </aside>
 
@@ -60,10 +57,10 @@
             ← Employees
           </a>
           <span style="color: #D1D5DB;">/</span>
-          <span class="header-title" style="font-size: 1rem;" id="headerEmpName">Alex Johnson</span>
+          <span class="header-title" style="font-size: 1rem;" id="headerEmpName">Employee Profile</span>
         </div>
         <div class="header-right">
-          <span class="header-date">Sep 6, 2026</span>
+          <span class="header-date" id="topHeaderDate"></span>
           <a href="assign-task.html" class="btn btn-primary btn-sm">+ Assign Task</a>
         </div>
       </header>
@@ -73,12 +70,15 @@
         <!-- Profile Title Header (Section 17) -->
         <div style="margin-bottom: 1.5rem; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
           <div>
-            <h1 class="page-headline" id="profileName">Alex Johnson</h1>
-            <p class="page-subheadline" id="profileRoleDept">Software Developer &bull; Engineering</p>
+            <h1 class="page-headline" id="profileName">Loading Profile...</h1>
+            <p class="page-subheadline" id="profileRoleDept"></p>
           </div>
           <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <span class="status-pill normal" id="profileStatusBadge">Active</span>
-            <span style="font-size: 0.75rem; color: #6B7280;" id="profileEmpId">ID: EMP-1024</span>
+            <span class="status-pill normal" id="profileStatusBadge">Loading</span>
+            <span style="font-size: 0.75rem; color: #6B7280;" id="profileEmpId"></span>
+            <button type="button" class="btn btn-danger btn-sm" id="deleteEmployeeBtn" style="margin-left: 0.25rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+              <span>🗑</span> Delete Account
+            </button>
           </div>
         </div>
 
@@ -136,20 +136,20 @@
         <!-- Compact Horizontal Summary (Section 17) -->
         <div class="metrics-row" style="margin-bottom: 1.75rem;">
           <div class="metric-box">
-            <div class="metric-number" id="detailWorkload">72%</div>
+            <div class="metric-number" id="detailWorkload">0%</div>
             <div class="metric-label" id="detailWorkloadLabel">Current Workload</div>
           </div>
           <div class="metric-box">
-            <div class="metric-number" id="detailActiveTime">5h 42m</div>
+            <div class="metric-number" id="detailActiveTime">0m</div>
             <div class="metric-label">Active Time</div>
           </div>
           <div class="metric-box">
-            <div class="metric-number" id="detailIdleTime">48m</div>
+            <div class="metric-number" id="detailIdleTime">0m</div>
             <div class="metric-label">Idle / No-input Time</div>
           </div>
           <div class="metric-box">
-            <div class="metric-number" id="detailTasksCount">4</div>
-            <div class="metric-label">Active Tasks</div>
+            <div class="metric-number" id="detailTasksCount">0</div>
+            <div class="metric-label">Total Sessions</div>
           </div>
         </div>
 
@@ -321,7 +321,30 @@
     </main>
   </div>
 
-  <script src="js/app.js"></script>
+  <!-- Delete Employee Account Confirmation Modal -->
+  <div class="modal-backdrop" id="deleteConfirmModal">
+    <div class="modal-dialog" style="max-width: 480px;">
+      <div class="modal-header" style="border-bottom-color: #FEE2E2; background: #FEF2F2;">
+        <div class="modal-title" style="color: #B91C1C;">
+          <span>⚠️</span> Confirm Permanent Deletion
+        </div>
+        <button type="button" class="modal-close" id="closeDeleteModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.95rem; color: #111827; margin-bottom: 0.75rem;">
+          Are you sure you want to permanently delete <strong id="deleteModalEmpName">this employee</strong>'s account?
+        </p>
+        <div style="background: #FFFBEB; border: 1px solid #FCD34D; border-radius: 6px; padding: 0.75rem; color: #92400E; font-size: 0.8125rem; line-height: 1.5;">
+          <strong>⚠️ Warning: This action is irreversible.</strong> All recorded activity telemetry, work sessions, task history, and account data will be permanently deleted from the system.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" id="cancelDeleteBtn">Cancel</button>
+        <button type="button" class="btn btn-danger btn-sm" id="confirmDeleteBtn">Yes, Delete Account Permanently</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/employees.js"></script>
 </body>
 </html>

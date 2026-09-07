@@ -21,7 +21,7 @@ import bcrypt
 import jwt
 from jwt import PyJWTError
 
-from app.config import settings
+from .config import settings
 
 TokenType = Literal["access", "refresh"]
 

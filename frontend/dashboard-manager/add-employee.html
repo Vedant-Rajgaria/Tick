@@ -35,18 +35,15 @@
         <div style="padding: 0.35rem 0.75rem; font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">
           System
         </div>
-        <a href="#" class="nav-link" style="color: #6B7280;">
-          <span>Settings</span>
-        </a>
-        <a href="../index.html" class="nav-link" style="color: #6B7280;">
+        <a href="login.html" class="nav-link" id="logoutLink" style="color: #6B7280;">
           <span>Logout</span>
         </a>
       </nav>
 
       <div class="sidebar-footer">
-        <div class="user-meta-role">Admin Workspace</div>
-        <div class="user-meta-name">Elena Rostova</div>
-        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;">Engineering Lead</div>
+        <div class="user-meta-role" id="adminSidebarRole">Admin Workspace</div>
+        <div class="user-meta-name" id="adminSidebarName">Loading...</div>
+        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;" id="adminSidebarMeta"></div>
       </div>
     </aside>
 
@@ -55,7 +52,7 @@
       <header class="top-header">
         <div class="header-title">Team Administration</div>
         <div class="header-right">
-          <span class="header-date">Sep 6, 2026</span>
+          <span class="header-date" id="topHeaderDate"></span>
           <span class="header-badge">Admin</span>
         </div>
       </header>
@@ -85,19 +82,12 @@
 
                 <div class="form-group">
                   <label class="form-label" for="newEmpName">Full Name</label>
-                  <input type="text" class="form-input" id="newEmpName" value="Alex Johnson" required />
+                  <input type="text" class="form-input" id="newEmpName" placeholder="e.g. Alex Johnson" required />
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                  <div class="form-group">
-                    <label class="form-label" for="newEmpEmail">Email</label>
-                    <input type="email" class="form-input" id="newEmpEmail" value="alex@example.com" required />
-                  </div>
-
-                  <div class="form-group">
-                    <label class="form-label" for="newEmpPhone">Phone</label>
-                    <input type="tel" class="form-input" id="newEmpPhone" value="+1 (555) 019-2834" />
-                  </div>
+                <div class="form-group">
+                  <label class="form-label" for="newEmpEmail">Email</label>
+                  <input type="email" class="form-input" id="newEmpEmail" placeholder="e.g. alex@acme.test" required />
                 </div>
 
                 <!-- Work Information -->
@@ -105,12 +95,7 @@
                   Work Information
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
-                  <div class="form-group">
-                    <label class="form-label" for="newEmpId">Employee ID</label>
-                    <input type="text" class="form-input" id="newEmpId" value="EMP-1024" required />
-                  </div>
-
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                   <div class="form-group">
                     <label class="form-label" for="newEmpDept">Department</label>
                     <select class="form-select" id="newEmpDept">
@@ -118,12 +103,13 @@
                       <option value="Design">Design</option>
                       <option value="Product">Product</option>
                       <option value="QA">QA</option>
+                      <option value="Operations">Operations</option>
                     </select>
                   </div>
 
                   <div class="form-group">
-                    <label class="form-label" for="newEmpRole">Role</label>
-                    <input type="text" class="form-input" id="newEmpRole" value="Software Developer" required />
+                    <label class="form-label" for="newEmpPassword">Temporary Password</label>
+                    <input type="text" class="form-input" id="newEmpPassword" placeholder="Auto-generated or custom" required />
                   </div>
                 </div>
 
@@ -148,24 +134,24 @@
 
             <div class="card-body-block">
               <div style="margin-bottom: 1.25rem;">
-                <div style="font-size: 1.25rem; font-weight: 700; color: #111827;" id="credEmpName">Alex Johnson</div>
-                <div style="font-size: 0.8125rem; color: #6B7280;" id="credEmpMeta">Software Developer &bull; Engineering</div>
+                <div style="font-size: 1.25rem; font-weight: 700; color: #111827;" id="credEmpName"></div>
+                <div style="font-size: 0.8125rem; color: #6B7280;" id="credEmpMeta"></div>
               </div>
 
               <div style="background-color: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 6px; padding: 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
                 <div>
                   <div style="font-size: 0.75rem; color: #6B7280; font-weight: 600; text-transform: uppercase;">Employee ID</div>
-                  <strong style="color: #111827; font-family: var(--font-mono);" id="credEmpId">EMP-1024</strong>
+                  <strong style="color: #111827; font-family: var(--font-mono);" id="credEmpId"></strong>
                 </div>
 
                 <div>
                   <div style="font-size: 0.75rem; color: #6B7280; font-weight: 600; text-transform: uppercase;">Login Email</div>
-                  <strong style="color: #111827;" id="credEmpLogin">alex@example.com</strong>
+                  <strong style="color: #111827;" id="credEmpLogin"></strong>
                 </div>
 
                 <div>
                   <div style="font-size: 0.75rem; color: #6B7280; font-weight: 600; text-transform: uppercase;">Temporary Password</div>
-                  <strong style="color: #2563EB; font-family: var(--font-mono); font-size: 1rem;">TIC-7X29P</strong>
+                  <strong style="color: #2563EB; font-family: var(--font-mono); font-size: 1rem;" id="credEmpPass"></strong>
                 </div>
               </div>
 
@@ -186,62 +172,139 @@
     </main>
   </div>
 
-  <script src="js/app.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const createBtn = document.getElementById('submitCreateEmpBtn');
-      const addCard = document.getElementById('addEmpCard');
-      const credCard = document.getElementById('credentialsCard');
-      const copyBtn = document.getElementById('copyCredBtn');
+    (function() {
+      'use strict';
+      const API_BASE = "http://localhost:8000/api/v1";
+      const TOKEN_KEY = "tick_access_token";
 
-      if (createBtn) {
-        createBtn.addEventListener('click', () => {
-          const name = document.getElementById('newEmpName').value || "Alex Johnson";
-          const email = document.getElementById('newEmpEmail').value || "alex@example.com";
-          const empId = document.getElementById('newEmpId').value || "EMP-1024";
-          const dept = document.getElementById('newEmpDept').value || "Engineering";
-          const role = document.getElementById('newEmpRole').value || "Software Developer";
+      document.addEventListener('DOMContentLoaded', () => {
+        const token = localStorage.getItem(TOKEN_KEY);
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
 
-          // Update credentials card
-          document.getElementById('credEmpName').textContent = name;
-          document.getElementById('credEmpMeta').textContent = `${role} • ${dept}`;
-          document.getElementById('credEmpId').textContent = empId;
-          document.getElementById('credEmpLogin').textContent = email;
+        // Header date
+        const dateEl = document.getElementById('topHeaderDate');
+        if (dateEl) {
+          dateEl.textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
 
-          // Add to shared state
-          const state = window.TICK.getState();
-          state.employees.push({
-            id: name.toLowerCase().replace(/\s+/g, '-'),
-            empId: empId,
-            name: name,
-            role: role,
-            department: dept,
-            workload: 0,
-            remainingHours: 0.0,
-            capacityHours: 25.0,
-            activeTime: "0m",
-            idleTime: "0m",
-            tasksCount: 0,
-            completedCount: 0,
-            status: "Active",
-            statusClass: "low"
+        // Logout
+        const logoutLink = document.getElementById('logoutLink');
+        if (logoutLink) {
+          logoutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem(TOKEN_KEY);
+            localStorage.removeItem('tick_user');
+            window.location.href = 'login.html';
           });
-          window.TICK.saveState(state);
+        }
 
-          // Swap views
-          addCard.style.display = 'none';
-          credCard.style.display = 'block';
-          window.TICK.showToast("Employee created successfully.");
-        });
-      }
+        // Fetch Admin profile
+        fetch(`${API_BASE}/auth/me`, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+          .then(res => {
+            if (!res.ok) throw new Error('Unauthorized');
+            return res.json();
+          })
+          .then(user => {
+            const nameEl = document.getElementById('adminSidebarName');
+            const roleEl = document.getElementById('adminSidebarRole');
+            const metaEl = document.getElementById('adminSidebarMeta');
+            if (nameEl) nameEl.textContent = user.name;
+            if (roleEl) roleEl.textContent = `${user.role} Workspace`;
+            if (metaEl) metaEl.textContent = `${user.department || 'Management'} • ${user.organization || 'TICK'}`;
+          })
+          .catch(() => {
+            localStorage.removeItem(TOKEN_KEY);
+            window.location.href = 'login.html';
+          });
 
-      if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-          navigator.clipboard.writeText("Employee ID: EMP-1024\nLogin: alex@example.com\nPassword: TIC-7X29P");
-          window.TICK.showToast("Credentials copied to clipboard.");
-        });
-      }
-    });
+        // Pre-generate a default temporary password
+        const passInput = document.getElementById('newEmpPassword');
+        if (passInput && !passInput.value) {
+          passInput.value = 'TIC-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+        }
+
+        const createBtn = document.getElementById('submitCreateEmpBtn');
+        const addCard = document.getElementById('addEmpCard');
+        const credCard = document.getElementById('credentialsCard');
+        const copyBtn = document.getElementById('copyCredBtn');
+
+        let createdCreds = null;
+
+        if (createBtn) {
+          createBtn.addEventListener('click', () => {
+            const name = document.getElementById('newEmpName').value.trim();
+            const email = document.getElementById('newEmpEmail').value.trim();
+            const dept = document.getElementById('newEmpDept').value;
+            const password = document.getElementById('newEmpPassword').value.trim();
+
+            if (!name || !email || !password) {
+              alert('Please fill out all required fields.');
+              return;
+            }
+
+            createBtn.disabled = true;
+
+            fetch(`${API_BASE}/admin/employees`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({ name, email, department: dept, password })
+            })
+              .then(res => {
+                if (!res.ok) {
+                  return res.json().then(err => { throw new Error(err.detail || 'Failed to create employee'); });
+                }
+                return res.json();
+              })
+              .then(created => {
+                createdCreds = {
+                  id: `EMP-${created.id}`,
+                  email: created.email,
+                  password: password
+                };
+
+                document.getElementById('credEmpName').textContent = created.name;
+                document.getElementById('credEmpMeta').textContent = `${created.role} • ${created.department}`;
+                document.getElementById('credEmpId').textContent = `EMP-${created.id}`;
+                document.getElementById('credEmpLogin').textContent = created.email;
+                document.getElementById('credEmpPass').textContent = password;
+
+                addCard.style.display = 'none';
+                credCard.style.display = 'block';
+              })
+              .catch(err => {
+                alert(err.message || 'Error creating employee.');
+              })
+              .finally(() => {
+                createBtn.disabled = false;
+              });
+          });
+        }
+
+        if (copyBtn) {
+          copyBtn.addEventListener('click', () => {
+            if (createdCreds) {
+              const text = `Employee ID: ${createdCreds.id}\nLogin Email: ${createdCreds.email}\nPassword: ${createdCreds.password}`;
+              navigator.clipboard.writeText(text).then(() => {
+                if (window.TICK && window.TICK.showToast) {
+                  window.TICK.showToast("Credentials copied to clipboard.");
+                } else {
+                  alert("Credentials copied to clipboard.");
+                }
+              });
+            }
+          });
+        }
+      });
+    })();
   </script>
 </body>
 </html>

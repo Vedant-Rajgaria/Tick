@@ -1,0 +1,78 @@
+{
+  "device_id": 42,
+  "period_start": "2026-09-07T09:00:00Z",
+  "period_end": "2026-09-07T17:00:00Z",
+  "applications": [
+    {
+      "name": "VS Code",
+      "process_name": "Code.exe",
+      "category": "development",
+      "start_time": "2026-09-07T09:00:00Z",
+      "end_time": "2026-09-07T13:30:00Z",
+      "duration_seconds": 16200,
+      "resource_usage": {
+        "avg_cpu_percent": 22.0,
+        "max_cpu_percent": 48.0,
+        "avg_gpu_percent": 2.0,
+        "max_gpu_percent": 6.0,
+        "sample_count": 270
+      }
+    },
+    {
+      "name": "Chrome",
+      "process_name": "chrome.exe",
+      "category": "browser",
+      "start_time": "2026-09-07T13:30:00Z",
+      "end_time": "2026-09-07T15:45:00Z",
+      "duration_seconds": 8100,
+      "resource_usage": {
+        "avg_cpu_percent": 14.0,
+        "max_cpu_percent": 33.0,
+        "avg_gpu_percent": 6.0,
+        "max_gpu_percent": 18.0,
+        "sample_count": 135
+      },
+      "browser_tabs": [
+        { "domain": "github.com", "start_time": "2026-09-07T13:30:00Z", "end_time": "2026-09-07T14:20:00Z", "duration_seconds": 3000 },
+        { "domain": "stackoverflow.com", "start_time": "2026-09-07T14:20:00Z", "end_time": "2026-09-07T14:50:00Z", "duration_seconds": 1800 },
+        { "domain": "docs.google.com", "start_time": "2026-09-07T14:50:00Z", "end_time": "2026-09-07T15:45:00Z", "duration_seconds": 3300 }
+      ]
+    },
+    {
+      "name": "Slack",
+      "process_name": "slack.exe",
+      "category": "communication",
+      "start_time": "2026-09-07T15:45:00Z",
+      "end_time": "2026-09-07T16:30:00Z",
+      "duration_seconds": 2700,
+      "resource_usage": { "avg_cpu_percent": 5.0, "max_cpu_percent": 12.0, "avg_gpu_percent": 0.5, "max_gpu_percent": 1.0, "sample_count": 45 }
+    },
+    {
+      "name": "Figma",
+      "process_name": "figma.exe",
+      "category": "design",
+      "start_time": "2026-09-07T16:30:00Z",
+      "end_time": "2026-09-07T17:00:00Z",
+      "duration_seconds": 1800,
+      "resource_usage": { "avg_cpu_percent": 18.0, "max_cpu_percent": 40.0, "avg_gpu_percent": 10.0, "max_gpu_percent": 25.0, "sample_count": 30 }
+    }
+  ],
+  "context_switches": {
+    "app_switch_count": 3,
+    "tab_switch_count": 2,
+    "events": [
+      { "type": "APP", "from": "VS Code", "to": "Chrome", "timestamp": "2026-09-07T13:30:00Z" },
+      { "type": "TAB", "from": "github.com", "to": "stackoverflow.com", "timestamp": "2026-09-07T14:20:00Z" },
+      { "type": "TAB", "from": "stackoverflow.com", "to": "docs.google.com", "timestamp": "2026-09-07T14:50:00Z" },
+      { "type": "APP", "from": "Chrome", "to": "Slack", "timestamp": "2026-09-07T15:45:00Z" },
+      { "type": "APP", "from": "Slack", "to": "Figma", "timestamp": "2026-09-07T16:30:00Z" }
+    ]
+  },
+  "input_activity": {
+    "keystroke_count": 9400,
+    "mouse_event_count": 3200,
+    "active_seconds": 26100,
+    "idle_seconds": 2700
+  },
+  "system_events": []
+}

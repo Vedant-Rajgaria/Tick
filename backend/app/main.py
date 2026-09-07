@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.config import settings
-from app.routers import auth, agent
+from .config import settings
+from .routers import auth, agent, employee, manager
 
 app = FastAPI(
     title="TICK API",
@@ -18,9 +18,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth.router, prefix="/api/v1")
-app.include_router(agent.router, prefix="/api/v1")
-
+# Support /api/v1, /api, and root prefixes for robust routing across all frontend pages and API callers
+for prefix in ["/api/v1", "/api", ""]:
+    app.include_router(auth.router, prefix=prefix)
+    app.include_router(agent.router, prefix=prefix)
+    app.include_router(employee.router, prefix=prefix)
+    app.include_router(manager.router, prefix=prefix)
 
 @app.get("/health")
 def health():

@@ -398,7 +398,7 @@
     }
 
     try {
-      const token = localStorage.getItem("tic_auth_token") || "mock-bearer-token";
+      const token = localStorage.getItem("tick_access_token") || localStorage.getItem("tic_auth_token") || "mock-bearer-token";
       const headers = {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,

@@ -55,6 +55,62 @@ paths:
         "401":
           description: Refresh token invalid or expired
 
+  /auth/register:
+    post:
+      summary: First-admin signup — always creates a brand-new organization and an ADMIN user in it
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [org_name, name, email, password]
+              properties:
+                org_name: { type: string }
+                name: { type: string }
+                email: { type: string, format: email }
+                password: { type: string }
+      responses:
+        "201":
+          description: Organization + admin created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/LoginResponse" }
+        "409":
+          description: Email already registered
+
+  /admin/employees:
+    post:
+      summary: Admin/manager creates an employee in their own organization
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password, department]
+              properties:
+                name: { type: string }
+                email: { type: string, format: email }
+                password: { type: string }
+                department: { type: string }
+      responses:
+        "201":
+          description: Employee created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: integer }
+                  name: { type: string }
+                  email: { type: string }
+                  department: { type: string }
+                  role: { type: string, enum: [EMPLOYEE] }
+        "409":
+          description: Email already registered
+
   /agent/register:
     post:
       summary: Register a desktop agent/device for the authenticated employee
@@ -233,7 +289,7 @@ paths:
 
   /manager/team:
     get:
-      summary: Team workload overview
+      summary: Team activity overview, derived from real collected activity data
       security: [{ bearerAuth: [] }]
       responses:
         "200":
@@ -241,24 +297,34 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items: { $ref: "#/components/schemas/TeamOverviewEntry" }
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items: { $ref: "#/components/schemas/TeamOverviewEntry" }
 
   /manager/employees/{employee_id}:
     get:
-      summary: Single employee detail view for a manager
+      summary: Single employee detail view for a manager, optionally filtered to one UTC calendar day
       security: [{ bearerAuth: [] }]
       parameters:
         - name: employee_id
           in: path
           required: true
           schema: { type: integer }
+        - name: date
+          in: query
+          required: false
+          schema: { type: string, format: date }
+          description: Filter to a single UTC calendar day. Omit for all-time.
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema: { $ref: "#/components/schemas/EmployeeDetail" }
+        "404":
+          description: Employee not found (or belongs to a different organization)
 
   /manager/workload:
     get:
@@ -309,18 +375,43 @@ components:
 
     EmployeeDashboard:
       type: object
+      description: >
+        Reconciled with the actually-implemented response shape of
+        GET /employee/me/dashboard and GET /manager/employees/{id} (previous
+        versions of this schema described aggregate fields — active_time,
+        workload_percentage, etc. — that the endpoint never actually
+        returned; see docs/CONTRACT_CHANGE_PROCESS.md).
       properties:
-        active_time: { type: integer, description: "seconds" }
-        idle_time: { type: integer, description: "seconds" }
-        sessions: { type: integer }
-        app_switches: { type: integer }
-        tab_switches: { type: integer }
-        keystroke_count: { type: integer }
-        mouse_event_count: { type: integer }
-        avg_cpu_percent: { type: number }
-        avg_gpu_percent: { type: number }
-        tasks_completed: { type: integer }
-        workload_percentage: { type: number }
+        workPulse:
+          type: array
+          items:
+            type: object
+            properties:
+              app: { type: string }
+              start: { type: string }
+              end: { type: string }
+              duration: { type: string }
+              type: { type: string }
+              width: { type: string }
+        applications:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              duration: { type: string }
+              category: { type: string }
+              lastActive: { type: string }
+        hourlyActivity:
+          type: array
+          items:
+            type: object
+            properties:
+              hour: { type: string }
+              intensityPercent: { type: number }
+        activeSeconds: { type: integer }
+        idleSeconds: { type: integer }
+        sessionCount: { type: integer }
 
     DailyMetric:
       type: object
@@ -388,29 +479,29 @@ components:
 
     TeamOverviewEntry:
       type: object
+      description: >
+        Real, derived-from-activity-data team summary. Does NOT include
+        task-based workload_percentage — that requires task estimated_hours
+        vs. capacity, which is out of scope for this pass.
       properties:
-        employee_id: { type: integer }
+        id: { type: integer }
         name: { type: string }
-        workload_percentage: { type: number }
-        remaining_hours: { type: number }
+        role: { type: string }
+        department: { type: string }
+        activeTime: { type: string }
+        sessionCount: { type: integer }
+        topApp: { type: [string, "null"] }
+        lastActive: { type: string }
 
     EmployeeDetail:
       type: object
       properties:
-        employee_id: { type: integer }
+        id: { type: integer }
         name: { type: string }
+        role: { type: string }
+        department: { type: string }
+        status: { type: string }
         dashboard: { $ref: "#/components/schemas/EmployeeDashboard" }
-        recent_tasks:
-          type: array
-          items: { $ref: "#/components/schemas/Task" }
-        baselines:
-          type: array
-          items:
-            type: object
-            properties:
-              metric: { type: string }
-              baseline_value: { type: number }
-              standard_deviation: { type: number }
 
     WorkloadEntry:
       type: object

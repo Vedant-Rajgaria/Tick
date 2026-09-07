@@ -43,7 +43,7 @@ class Settings:
 
     # --- CORS (for the static frontend dashboards during dev) ---
     CORS_ORIGINS: list[str] = os.getenv(
-        "CORS_ORIGINS", "http://localhost:5500,http://127.0.0.1:5500"
+        "CORS_ORIGINS", "http://localhost:5500,http://127.0.0.1:5500,http://[::1]:5500"
     ).split(",")
 
 

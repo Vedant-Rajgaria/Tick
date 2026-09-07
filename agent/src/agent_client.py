@@ -70,8 +70,8 @@ class AgentClient:
         resp.raise_for_status()
         self.access_token = resp.json()["access_token"]
 
-    def register_device(self):
-        if self.device_id is not None:
+    def register_device(self, force: bool = False):
+        if self.device_id is not None and not force:
             return self.device_id
 
         resp = requests.post(
@@ -101,6 +101,12 @@ class AgentClient:
             )
             if resp.status_code == 401 and attempt < max_retries:
                 self._refresh_access_token()
+                continue
+            if resp.status_code == 403 and attempt < max_retries:
+                # Stale or mismatched device_id — force re-registration
+                self.device_id = None
+                self.register_device(force=True)
+                payload["device_id"] = self.device_id
                 continue
             if resp.status_code == 422:
                 # Schema validation failed server-side — log and drop rather

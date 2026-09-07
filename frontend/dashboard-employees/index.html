@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Workspace — TICK</title>
+  <link rel="icon" type="image/x-icon" href="assets/icon/images/logo.png" />
   <link rel="stylesheet" href="css/style.css" />
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -11,87 +12,207 @@
 <body>
   <div class="app-container">
     
-    <!-- Sidebar -->
+    <!-- Sidebar: Fixed Left Sidebar (Figma 171:1744) -->
     <aside class="sidebar">
-      <div class="sidebar-header">
-        <div class="brand-mark">T</div>
-        <span class="brand-title">TICK</span>
+      <div>
+        <div class="sidebar-header">
+          <a href="index.html" class="brand-wrapper">
+            <img src="assets/icon/images/logo.png" alt="TICK" class="brand-logo-img" />
+          </a>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="index.html" class="nav-link active">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </span>
+            <span>Overview</span>
+          </a>
+
+          <a href="#workPulseSection" class="nav-link">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+            </span>
+            <span>My activity</span>
+          </a>
+
+          <a href="#myTasksSection" class="nav-link">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 11 12 14 22 4"></polyline>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+              </svg>
+            </span>
+            <span>My tasks</span>
+          </a>
+
+          <div class="nav-divider"></div>
+
+          <a href="#settings" class="nav-link" style="color: var(--text-muted);">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </span>
+            <span>Settings</span>
+          </a>
+
+          <a href="login.html" class="nav-link" id="empLogoutLink" style="color: var(--text-muted);">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+            </span>
+            <span>Log out</span>
+          </a>
+        </nav>
       </div>
 
-      <nav class="sidebar-nav">
-        <a href="index.html" class="nav-link active">
-          <span>Overview</span>
-        </a>
-        <a href="#workPulseSection" class="nav-link">
-          <span>My Activity</span>
-        </a>
-        <a href="#myTasksSection" class="nav-link">
-          <span>My Tasks</span>
-        </a>
-
-        <div class="nav-divider"></div>
-
-        <div style="padding: 0.35rem 0.75rem; font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">
-          Account
-        </div>
-        <a href="login.html" class="nav-link" id="empLogoutLink" style="color: #6B7280;">
-          <span>Logout</span>
-        </a>
-      </nav>
-
+      <!-- User Profile Bottom (Figma 171:1792) -->
       <div class="sidebar-footer">
-        <div class="user-meta-role" id="empSidebarRole">Personal Workspace</div>
-        <div class="user-meta-name" id="empSidebarName">Loading...</div>
-        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;" id="empSidebarMeta"></div>
+        <div class="user-meta-role" id="empSidebarRole">Admin Workspace</div>
+        <div class="user-meta-detail">
+          <div class="user-avatar-circle" style="background: linear-gradient(135deg, #06B6D4, #3B82F6); color: #FFFFFF;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div>
+            <div class="user-meta-name" id="empSidebarName">Jay Bhalotia</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 1px;" id="empSidebarMeta">Software Engineer</div>
+          </div>
+        </div>
       </div>
     </aside>
 
-    <!-- Main Content Area -->
+    <!-- Main Content Area (Figma 171:1806) -->
     <main class="main-content">
       <header class="top-header">
-        <div class="header-title">My Workday</div>
+        <div class="breadcrumb-nav">
+          <span>Dashboard</span>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-active">Personal Telemetry</span>
+        </div>
         <div class="header-right">
+          <div class="live-telemetry-badge">
+            <span class="pulse-dot"></span>
+            <span>Live Telemetry</span>
+          </div>
           <span class="header-date" id="topHeaderDate"></span>
-          <span class="header-badge">Employee</span>
+          <button type="button" class="btn btn-secondary btn-sm btn-icon" title="Notifications">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+          </button>
         </div>
       </header>
 
       <div class="page-body">
         
-        <!-- Employee Greeting -->
+        <!-- Employee Greeting Header (Figma 171:1806) -->
         <div class="page-header-block">
-          <h1 class="page-headline" id="empGreeting">Good morning</h1>
-          <p class="page-subheadline">Here's your work cadence and active commitments for today.</p>
+          <div>
+            <h1 class="page-headline" id="empGreeting">Welcome, Jay!</h1>
+            <p class="page-subheadline">Here's your work cadence, focus timeline, and active deliverables for today.</p>
+          </div>
+
+          <button type="button" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 0.45rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Export Log
+          </button>
         </div>
 
-        <!-- 4 Metrics -->
+        <!-- Metric Highlight Cards (Figma 171:1743) -->
         <div class="metrics-row">
+          
+          <!-- Useful Work -->
           <div class="metric-box">
-            <div class="metric-number" id="empUsefulWork">0m</div>
-            <div class="metric-label">Useful Work</div>
+            <div>
+              <div class="metric-label">Useful Work</div>
+              <div class="metric-number" id="empUsefulWork">0m</div>
+            </div>
+            <div class="metric-progression">
+              <div class="progression-meta">
+                <span>Sprint Target: 6h/day</span>
+                <span class="progression-meta-val" style="color: #34D399;">+18m over avg</span>
+              </div>
+              <div class="progression-track">
+                <div class="progression-fill cyan-mint" style="width: 87%;"></div>
+              </div>
+            </div>
           </div>
+
+          <!-- Idle / Reading Time -->
           <div class="metric-box">
-            <div class="metric-number" id="empIdleTime">0m</div>
-            <div class="metric-label">Idle / Reading Time</div>
+            <div>
+              <div class="metric-label">Idle / Reading Time</div>
+              <div class="metric-number" id="empIdleTime">0m</div>
+            </div>
+            <div class="metric-progression">
+              <div class="progression-meta">
+                <span>Rest &amp; Context Shifts</span>
+                <span class="progression-meta-val">High Efficiency</span>
+              </div>
+              <div class="progression-track">
+                <div class="progression-fill" style="background: #334155; width: 12%;"></div>
+              </div>
+            </div>
           </div>
+
+          <!-- Cognitive Flow State -->
           <div class="metric-box">
-            <div class="metric-number" id="empSessionCount">0</div>
-            <div class="metric-label">Tracked Sessions</div>
+            <div>
+              <div class="metric-label">Cognitive Flow State</div>
+              <div class="metric-number" id="empFlowState" style="color: #38BDF8;">84%</div>
+            </div>
+            <div class="metric-progression">
+              <div class="progression-meta">
+                <span>High Cohesion</span>
+                <span class="progression-meta-val" style="color: #38BDF8;">Low Burnout Risk</span>
+              </div>
+              <div class="progression-track">
+                <div class="progression-fill blue-cyan" style="width: 84%;"></div>
+              </div>
+            </div>
           </div>
-          <div class="metric-box">
-            <div class="metric-number" style="color: #059669;" id="empAppCount">0</div>
-            <div class="metric-label">Active Applications</div>
+
+          <!-- Hidden binding targets for API stats -->
+          <div style="display: none;">
+            <span id="empSessionCount">0</span>
+            <span id="empAppCount">0</span>
           </div>
+
         </div>
 
-        <!-- SIGNATURE EXPERIENCE 1: WORK PULSE (Section 29) -->
+        <!-- SIGNATURE EXPERIENCE 1: WORK PULSE & COGNITIVE RHYTHM (Figma 171:1743) -->
         <section class="content-card" id="workPulseSection">
           <div class="card-header-bar">
             <div>
               <h2 class="card-heading">Work Pulse</h2>
-              <p class="card-subheading">Your recorded workday from 09:00 to 18:00. Hover over any block to see session details.</p>
+              <p class="card-subheading">Your recorded workday timeline. Hover over blocks to inspect session telemetry.</p>
             </div>
-            <span class="status-pill normal">Continuous Session</span>
+
+            <div class="timeframe-mode-toggle">
+              <button type="button" class="timeframe-mode-btn active">Daily</button>
+              <button type="button" class="timeframe-mode-btn">Weekly</button>
+              <button type="button" class="timeframe-mode-btn">Monthly</button>
+            </div>
           </div>
 
           <div class="card-body-block">
@@ -110,7 +231,7 @@
                 <!-- Built via dashboard.js -->
               </div>
 
-              <!-- Tooltip -->
+              <!-- Floating Tooltip -->
               <div class="pulse-tooltip" id="empPulseTooltip">
                 <div class="pulse-tooltip-title" id="empTooltipApp">VS Code</div>
                 <div class="pulse-tooltip-meta" id="empTooltipMeta">10:12 AM – 11:36 AM (1h 24m)</div>
@@ -118,90 +239,124 @@
 
               <!-- Legend -->
               <div class="pulse-legend">
-                <div><span class="legend-dot" style="background-color: #4F46E5;"></span>Focus / Development</div>
-                <div><span class="legend-dot" style="background-color: #2563EB;"></span>Active Work / Communication</div>
-                <div><span class="legend-dot" style="background-color: #E5E7EB;"></span>Idle / Reading Interval</div>
+                <div><span class="legend-dot" style="background-color: #10B981;"></span>Focus / Dev</div>
+                <div><span class="legend-dot" style="background-color: #0EA5E9;"></span>Active Work / Review</div>
+                <div><span class="legend-dot" style="background-color: #334155;"></span>Idle / Reading</div>
+                <div style="margin-left: auto; color: var(--text-muted);">
+                  Current Focus: <strong style="color: var(--text-primary);">VS Code</strong> &bull; <span style="color: #34D399;">Peak state at 15:45</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cognitive Rhythm & Intensity Curve -->
+            <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                <div style="font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary);">Cognitive Rhythm &amp; Intensity Curve</div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <span class="status-pill low" style="font-size: 0.7rem;">&bull; Peak Focus: 15:45</span>
+                  <span style="font-size: 0.75rem; color: #38BDF8;">&bull; Target Baseline (75%)</span>
+                </div>
+              </div>
+
+              <div style="height: 180px; width: 100%;">
+                <canvas id="empUsefulWorkChart"></canvas>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- USEFUL WORK GRAPH (Section 19 / 29) -->
-        <section class="content-card">
-          <div class="card-header-bar">
-            <div>
-              <h2 class="card-heading">Useful Work Graph</h2>
-              <p class="card-subheading">Work intensity baseline across today's sessions.</p>
+        <!-- TWO COLUMN ROW: APPLICATION USAGE & WORK LOAD / MY TASKS (Figma 171:1743) -->
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem;">
+          
+          <!-- Application Usage Table -->
+          <section class="content-card">
+            <div class="card-header-bar">
+              <div>
+                <h2 class="card-heading">Application Usage Breakdown</h2>
+                <p class="card-subheading">Active time spent across developer applications today.</p>
+              </div>
+              <span class="engineers-badge">Today</span>
             </div>
-          </div>
-          <div class="card-body-block">
-            <div style="height: 200px; width: 100%;">
-              <canvas id="empUsefulWorkChart"></canvas>
+            
+            <div class="table-wrap">
+              <table class="clean-table">
+                <thead>
+                  <tr>
+                    <th>Application</th>
+                    <th>Duration</th>
+                    <th>Category</th>
+                    <th>Last Active</th>
+                  </tr>
+                </thead>
+                <tbody id="empAppUsageTbody">
+                  <!-- Built via dashboard.js -->
+                </tbody>
+              </table>
             </div>
-          </div>
-        </section>
 
-        <!-- APPLICATION USAGE (Section 29) -->
-        <section class="content-card">
-          <div class="card-header-bar">
-            <div>
-              <h2 class="card-heading">Application Usage</h2>
-              <p class="card-subheading">Active time spent across developer applications today.</p>
+            <div class="card-table-footer">
+              <span>Showing top developer applications</span>
+              <a href="#processes">View all processes &rarr;</a>
             </div>
-          </div>
-          <div class="table-wrap">
-            <table class="clean-table">
-              <thead>
-                <tr>
-                  <th>Application</th>
-                  <th>Duration</th>
-                  <th>Category</th>
-                  <th>Last Active</th>
-                </tr>
-              </thead>
-              <tbody id="empAppUsageTbody">
-                <!-- Built via dashboard.js -->
-              </tbody>
-            </table>
-          </div>
-        </section>
+          </section>
 
-        <!-- MY TASKS & TASK COMPLETION FLOW (Section 22 & 23) -->
-        <section class="content-card" id="myTasksSection">
-          <div class="card-header-bar">
-            <div>
-              <h2 class="card-heading">My Tasks</h2>
-              <p class="card-subheading">Your assigned deliverables. Mark items as completed when finished to record delivery time.</p>
+          <!-- Work Load / My Tasks (Figma 171:1743) -->
+          <section class="content-card" id="myTasksSection">
+            <div class="card-header-bar">
+              <div>
+                <h2 class="card-heading">Work Load</h2>
+                <p class="card-subheading">Your assigned deliverables and delivery tracking.</p>
+              </div>
+              <span class="engineers-badge" style="color: #38BDF8;">2 In Progress</span>
             </div>
-          </div>
 
-          <div class="card-body-block" id="myTasksContainer">
-            <!-- Dynamically populated via tasks.js -->
-          </div>
-        </section>
+            <div class="card-body-block">
+              <div id="myTasksContainer">
+                <!-- Dynamically populated via tasks.js -->
+              </div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid var(--border-subtle); font-size: 0.75rem; color: var(--text-muted);">
+                <a href="#custom" style="color: #38BDF8; font-weight: 600;">+ Add custom task</a>
+                <span>Sprint ends in 3 days</span>
+              </div>
+            </div>
+          </section>
+
+        </div>
 
       </div>
     </main>
   </div>
 
-  <!-- TASK COMPLETION CONFIRMATION MODAL (Section 23) -->
+  <!-- Task Completion Confirmation Modal (Dark Obsidian) -->
   <div class="modal-overlay" id="taskCompleteModal">
     <div class="modal-card">
-      <h3 class="modal-title">Complete task?</h3>
-      <p class="modal-desc" id="modalTaskDesc">
-        Are you sure you have completed "Build Payment API"?
-      </p>
+      <div class="modal-header" style="border-bottom-color: rgba(16, 185, 129, 0.25); background: rgba(16, 185, 129, 0.08);">
+        <h3 class="modal-title" style="color: #34D399; display: flex; align-items: center; gap: 0.5rem;">
+          <span>✓</span> Complete Task
+        </h3>
+        <button type="button" class="modal-close" onclick="document.getElementById('taskCompleteModal').classList.remove('active')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc" id="modalTaskDesc" style="color: var(--text-primary); font-size: 0.95rem;">
+          Are you sure you have completed this deliverable?
+        </p>
+        <p style="font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.5rem;">
+          Marking as complete will record the actual delivery time and recalculate your sprint velocity.
+        </p>
+      </div>
       <div class="modal-actions">
         <button type="button" class="btn btn-secondary btn-sm" id="cancelCompleteBtn">
           Cancel
         </button>
-        <button type="button" class="btn btn-primary btn-sm" id="confirmCompleteBtn" style="background-color: #059669;">
+        <button type="button" class="btn btn-mint btn-sm" id="confirmCompleteBtn">
           Confirm Completion
         </button>
       </div>
     </div>
   </div>
 
+  <script src="js/sidebar.js"></script>
   <script src="js/dashboard.js"></script>
   <script src="js/tasks.js"></script>
 </body>

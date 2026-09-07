@@ -4,101 +4,165 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Assign Task — TICK</title>
+  <link rel="icon" type="image/x-icon" href="assets/icon/images/logo.png" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="app-container">
     
-    <!-- Sidebar -->
+    <!-- Sidebar (Figma 171:1307) -->
     <aside class="sidebar">
-      <div class="sidebar-header">
-        <div class="brand-mark">T</div>
-        <span class="brand-title">TICK</span>
-      </div>
-
-      <nav class="sidebar-nav">
-        <a href="index.html" class="nav-link">
-          <span>Overview</span>
-        </a>
-        <a href="index.html#employeesSection" class="nav-link">
-          <span>Employees</span>
-        </a>
-        <a href="assign-task.html" class="nav-link active">
-          <span>Assign Task</span>
-        </a>
-        <a href="add-employee.html" class="nav-link">
-          <span>Add Employee</span>
-        </a>
-
-        <div class="nav-divider"></div>
-
-        <div style="padding: 0.35rem 0.75rem; font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">
-          System
+      <div>
+        <div class="sidebar-header">
+          <a href="index.html" class="brand-wrapper">
+            <img src="assets/icon/images/logo.png" alt="TICK" class="brand-logo-img" />
+          </a>
         </div>
-        <a href="login.html" class="nav-link" id="logoutLink" style="color: #6B7280;">
-          <span>Logout</span>
-        </a>
-      </nav>
+
+        <nav class="sidebar-nav">
+          <a href="index.html" class="nav-link">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </span>
+            <span>Overview</span>
+          </a>
+
+          <a href="index.html#employeesSection" class="nav-link">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </span>
+            <span>Employee</span>
+          </a>
+
+          <a href="assign-task.html" class="nav-link active">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 11 12 14 22 4"></polyline>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+              </svg>
+            </span>
+            <span>Assign task</span>
+          </a>
+
+          <a href="add-employee.html" class="nav-link">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+              </svg>
+            </span>
+            <span>Add employee</span>
+          </a>
+
+          <div class="nav-divider"></div>
+
+          <a href="login.html" class="nav-link" id="logoutLink" style="color: var(--text-muted);">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+            </span>
+            <span>Log out</span>
+          </a>
+        </nav>
+      </div>
 
       <div class="sidebar-footer">
         <div class="user-meta-role" id="adminSidebarRole">Admin Workspace</div>
-        <div class="user-meta-name" id="adminSidebarName">Loading...</div>
-        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;" id="adminSidebarMeta"></div>
+        <div class="user-meta-detail">
+          <div class="user-avatar-circle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div>
+            <div class="user-meta-name" id="adminSidebarName">Loading...</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 1px;" id="adminSidebarMeta"></div>
+          </div>
+        </div>
       </div>
     </aside>
 
-    <!-- Main Content Area -->
+    <!-- Main Content Area (Figma 171:1307) -->
     <main class="main-content">
       <header class="top-header">
-        <div class="header-title">Smart Task Assignment</div>
+        <div class="breadcrumb-nav">
+          <span>Dashboard</span>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-active">Smart Task Assignment</span>
+        </div>
         <div class="header-right">
+          <div class="live-telemetry-badge">
+            <span class="pulse-dot"></span>
+            <span>Decision Support Active</span>
+          </div>
           <span class="header-date" id="topHeaderDate"></span>
-          <span class="header-badge">Decision Support</span>
         </div>
       </header>
 
       <div class="page-body">
         
         <div class="page-header-block">
-          <h1 class="page-headline">Assign Task</h1>
-          <p class="page-subheadline">Specify task requirements and let TICK evaluate team capacity and skill alignment.</p>
+          <div>
+            <h1 class="page-headline">Assign Task</h1>
+            <p class="page-subheadline">Specify task requirements and let TICK evaluate squad capacity and skill alignment.</p>
+          </div>
+
+          <!-- Mini Metrics Badge (Figma 171:1307) -->
+          <div style="display: flex; align-items: center; gap: 0.85rem;">
+            <div class="metric-box" style="padding: 0.5rem 1rem; border-radius: var(--radius-sm);">
+              <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Available</span>
+              <strong style="font-size: 0.95rem; color: #38BDF8;">5 Roster</strong>
+            </div>
+            <div class="metric-box" style="padding: 0.5rem 1rem; border-radius: var(--radius-sm);">
+              <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Squad Velocity</span>
+              <strong style="font-size: 0.95rem; color: #34D399;">78% Pace</strong>
+            </div>
+            <div class="metric-box" style="padding: 0.5rem 1rem; border-radius: var(--radius-sm);">
+              <span style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Squad Risk</span>
+              <strong style="font-size: 0.95rem; color: #10B981;">12.5% Low</strong>
+            </div>
+          </div>
         </div>
 
-        <!-- TWO COLUMN WORKSPACE: FORM ON LEFT, RECOMMENDATION ON RIGHT -->
+        <!-- TWO COLUMN WORKSPACE: TASK FORM ON LEFT, RECOMMENDATION ON RIGHT -->
         <div style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 2rem; align-items: flex-start;">
           
-          <!-- STEP 1: TASK FORM (Section 24) -->
-          <div class="content-card" style="margin-bottom: 0;">
+          <!-- STEP 1: TASK FORM (Figma 171:1307) -->
+          <div class="content-card">
             <div class="card-header-bar">
-              <div>
-                <h2 class="card-heading">Step 1: What needs to be done?</h2>
-                <p class="card-subheading">Define the requirements before assigning to any individual.</p>
+              <div class="card-heading-group">
+                <span class="avatar-initials blue" style="width: 26px; height: 26px; font-size: 0.75rem;">1</span>
+                <h2 class="card-heading">What needs to be done?</h2>
               </div>
+              <span class="engineers-badge">SPEC-2026.09</span>
             </div>
 
             <div class="card-body-block">
               <form id="assignTaskForm" onsubmit="return false;">
                 <div class="form-group">
-                  <label class="form-label" for="taskNameInput">Task Name</label>
+                  <label class="form-label" for="taskNameInput">TASK NAME</label>
                   <input type="text" class="form-input" id="taskNameInput" placeholder="e.g. Build Payment API" required />
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" for="taskSkillsInput">Required Skills (comma-separated)</label>
-                  <input type="text" class="form-input" id="taskSkillsInput" placeholder="e.g. Python, FastAPI, PostgreSQL" />
-                  <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem;" id="quickSkillTags">
-                    <span class="skill-tag-pill" data-skill="Python" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ Python</span>
-                    <span class="skill-tag-pill" data-skill="FastAPI" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ FastAPI</span>
-                    <span class="skill-tag-pill" data-skill="PostgreSQL" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ PostgreSQL</span>
-                    <span class="skill-tag-pill" data-skill="Docker" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ Docker</span>
-                    <span class="skill-tag-pill" data-skill="UI Design" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ UI Design</span>
-                    <span class="skill-tag-pill" data-skill="Testing" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ Testing</span>
-                  </div>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                   <div class="form-group">
-                    <label class="form-label" for="taskTypeSelect">Task Type</label>
+                    <label class="form-label" for="taskTypeSelect">TASK TYPE</label>
                     <select class="form-select" id="taskTypeSelect">
                       <option value="Development" selected>Development</option>
                       <option value="Design">Design</option>
@@ -108,33 +172,45 @@
                   </div>
 
                   <div class="form-group">
-                    <label class="form-label" for="taskPrioritySelect">Priority</label>
+                    <label class="form-label" for="taskPrioritySelect">PRIORITY</label>
                     <select class="form-select" id="taskPrioritySelect">
-                      <option value="High" selected>High</option>
-                      <option value="Critical">Critical</option>
-                      <option value="Medium">Medium</option>
-                      <option value="Low">Low</option>
+                      <option value="High" selected>High Priority</option>
+                      <option value="Critical">Critical Priority</option>
+                      <option value="Medium">Medium Priority</option>
+                      <option value="Low">Low Priority</option>
                     </select>
                   </div>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                   <div class="form-group">
-                    <label class="form-label" for="taskDeadlineInput">Deadline</label>
+                    <label class="form-label" for="taskDeadlineInput">DEADLINE</label>
                     <input type="date" class="form-input" id="taskDeadlineInput" />
                   </div>
 
                   <div class="form-group">
-                    <label class="form-label" for="taskEstTimeInput">Estimated Hours</label>
+                    <label class="form-label" for="taskEstTimeInput">ESTIMATED EFFORT (HOURS)</label>
                     <input type="number" step="0.5" min="1" max="100" class="form-input" id="taskEstTimeInput" placeholder="e.g. 8" value="8" required />
                   </div>
                 </div>
 
-                <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #E5E7EB;">
-                  <button type="button" class="btn btn-primary" id="findBestFitBtn" style="width: 100%; padding: 0.75rem; font-size: 0.95rem;">
-                    FIND BEST FIT →
+                <div class="form-group">
+                  <label class="form-label" for="taskSkillsInput">REQUIRED SKILLS &amp; STACK</label>
+                  <input type="text" class="form-input" id="taskSkillsInput" placeholder="TypeScript, Node.js, Stripe API, PostgreSQL" />
+                  <div style="display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.6rem;" id="quickSkillTags">
+                    <span class="skill-tag-pill" data-skill="TypeScript" style="font-size: 0.75rem; padding: 3px 10px; background: rgba(56, 189, 248, 0.1); color: #38BDF8; border-radius: var(--radius-sm); cursor: pointer; border: 1px solid rgba(56, 189, 248, 0.3);">TypeScript &times;</span>
+                    <span class="skill-tag-pill" data-skill="Node.js" style="font-size: 0.75rem; padding: 3px 10px; background: rgba(56, 189, 248, 0.1); color: #38BDF8; border-radius: var(--radius-sm); cursor: pointer; border: 1px solid rgba(56, 189, 248, 0.3);">Node.js &times;</span>
+                    <span class="skill-tag-pill" data-skill="Stripe API" style="font-size: 0.75rem; padding: 3px 10px; background: rgba(56, 189, 248, 0.1); color: #38BDF8; border-radius: var(--radius-sm); cursor: pointer; border: 1px solid rgba(56, 189, 248, 0.3);">Stripe API &times;</span>
+                    <span class="skill-tag-pill" data-skill="PostgreSQL" style="font-size: 0.75rem; padding: 3px 10px; background: rgba(56, 189, 248, 0.1); color: #38BDF8; border-radius: var(--radius-sm); cursor: pointer; border: 1px solid rgba(56, 189, 248, 0.3);">PostgreSQL &times;</span>
+                    <span class="skill-tag-pill" data-skill="Docker" style="font-size: 0.75rem; padding: 3px 10px; background: var(--bg-surface-elevated); color: var(--text-secondary); border-radius: var(--radius-sm); cursor: pointer; border: 1px solid var(--border-subtle);">+ Docker</span>
+                  </div>
+                </div>
+
+                <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle);">
+                  <button type="button" class="btn btn-primary" id="findBestFitBtn" style="width: 100%; padding: 0.85rem; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.02em;">
+                    EVALUATE SQUAD &amp; FIND BEST FIT &rarr;
                   </button>
-                  <div style="font-size: 0.75rem; color: #6B7280; text-align: center; margin-top: 0.5rem;">
+                  <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 0.5rem;">
                     The system recommends. You make the final decision.
                   </div>
                 </div>
@@ -142,31 +218,37 @@
             </div>
           </div>
 
-          <!-- STEP 2: RECOMMENDATION CONTAINER (Sections 25, 26, 27) -->
+          <!-- STEP 2: RECOMMENDATION CONTAINER (Figma 171:1307) -->
           <div id="recommendationPanel">
-            <!-- Initial Empty State -->
-            <div class="content-card" style="margin-bottom: 0;">
+            <div class="content-card">
               <div class="card-header-bar">
-                <h2 class="card-heading">Step 2: Recommendation & Capacity</h2>
+                <div class="card-heading-group">
+                  <span class="avatar-initials emerald" style="width: 26px; height: 26px; font-size: 0.75rem;">2</span>
+                  <h2 class="card-heading">Recommendation &amp; Capacity Alignment</h2>
+                </div>
+                <span class="engineers-badge" style="color: #34D399; border-color: rgba(52, 211, 153, 0.3);">96.4% Algorithmic Match</span>
               </div>
-              <div class="card-body-block" style="text-align: center; padding: 4rem 1.5rem; color: #6B7280;" id="recPlaceholder">
-                <div style="font-weight: 600; color: #374151; margin-bottom: 0.25rem; font-size: 1rem;">
+
+              <!-- Awaiting Task Evaluation Initial State -->
+              <div class="card-body-block" style="text-align: center; padding: 4.5rem 1.5rem; color: var(--text-muted);" id="recPlaceholder">
+                <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">⚡</div>
+                <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem; font-size: 1.1rem;">
                   Awaiting Task Evaluation
                 </div>
-                <p style="font-size: 0.8125rem; max-width: 320px; margin: 0 auto; color: #9CA3AF;">
-                  Fill in the task details on the left and click <strong>"FIND BEST FIT →"</strong> to evaluate available capacity and skill alignment.
+                <p style="font-size: 0.8125rem; max-width: 320px; margin: 0 auto; color: var(--text-secondary); line-height: 1.5;">
+                  Fill in the task details on the left and click <strong>"EVALUATE SQUAD &amp; FIND BEST FIT"</strong> to calculate real-time capacity and fit scores.
                 </p>
               </div>
 
-              <!-- Subtle Loader (Short & Clean) -->
-              <div class="subtle-loader" id="recLoader" style="display: none;">
-                <div class="loader-spinner"></div>
-                <span id="loaderMessage">Analyzing team capacity...</span>
+              <!-- Loader Spinner -->
+              <div class="subtle-loader" id="recLoader" style="display: none; padding: 3rem 1.5rem; text-align: center; justify-content: center; align-items: center; flex-direction: column; gap: 0.75rem;">
+                <div class="pulse-dot" style="width: 16px; height: 16px;"></div>
+                <span id="loaderMessage" style="font-size: 0.85rem; color: var(--primary);">Analyzing squad capacity...</span>
               </div>
 
-              <!-- Recommendation Result Container -->
+              <!-- Recommendation Result Container (Injected via recommendations.js) -->
               <div id="recResultsContent" style="display: none; padding: 1.5rem;">
-                <!-- Populated via JS -->
+                <!-- Populated via recommendations.js -->
               </div>
             </div>
           </div>
@@ -177,6 +259,7 @@
     </main>
   </div>
 
+  <script src="js/sidebar.js"></script>
   <script src="js/recommendations.js"></script>
 </body>
 </html>

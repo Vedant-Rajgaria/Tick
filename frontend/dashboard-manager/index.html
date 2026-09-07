@@ -4,99 +4,238 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Workforce Overview — TICK</title>
+  <link rel="icon" type="image/x-icon" href="assets/icon/images/logo.png" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="app-container">
     
     <!-- ====================================================================
-         ADMIN SIDEBAR
+         ADMIN ASIDE: FIXED LEFT SIDEBAR (Figma 171:154)
          ==================================================================== -->
     <aside class="sidebar">
-      <div class="sidebar-header">
-        <div class="brand-mark">T</div>
-        <span class="brand-title">TICK</span>
+      <div>
+        <div class="sidebar-header">
+          <a href="index.html" class="brand-wrapper">
+            <img src="assets/icon/images/logo.png" alt="TICK" class="brand-logo-img" />
+          </a>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="index.html" class="nav-link active">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </span>
+            <span>Overview</span>
+          </a>
+
+          <a href="#employeesSection" class="nav-link" id="navEmployeesLink">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </span>
+            <span>Employee</span>
+          </a>
+
+          <a href="assign-task.html" class="nav-link">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 11 12 14 22 4"></polyline>
+                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+              </svg>
+            </span>
+            <span>Assign task</span>
+          </a>
+
+          <a href="add-employee.html" class="nav-link">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+              </svg>
+            </span>
+            <span>Add employee</span>
+          </a>
+
+          <div class="nav-divider"></div>
+
+          <a href="#settings" class="nav-link" style="color: var(--text-muted);">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </span>
+            <span>Settings</span>
+          </a>
+
+          <a href="login.html" class="nav-link" id="logoutLink" style="color: var(--text-muted);">
+            <span class="nav-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+            </span>
+            <span>Log out</span>
+          </a>
+        </nav>
       </div>
 
-      <nav class="sidebar-nav">
-        <a href="index.html" class="nav-link active">
-          <span>Overview</span>
-        </a>
-        <a href="#employeesSection" class="nav-link" id="navEmployeesLink">
-          <span>Employees</span>
-        </a>
-        <a href="assign-task.html" class="nav-link">
-          <span>Assign Task</span>
-        </a>
-        <a href="add-employee.html" class="nav-link">
-          <span>Add Employee</span>
-        </a>
-
-        <div class="nav-divider"></div>
-
-        <div style="padding: 0.35rem 0.75rem; font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">
-          System
-        </div>
-        <a href="login.html" class="nav-link" id="logoutLink" style="color: #6B7280;">
-          <span>Logout</span>
-        </a>
-      </nav>
-
+      <!-- Bottom Profile Card (Figma 171:216) -->
       <div class="sidebar-footer">
         <div class="user-meta-role" id="adminSidebarRole">Admin Workspace</div>
-        <div class="user-meta-name" id="adminSidebarName">Loading...</div>
-        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;" id="adminSidebarMeta"></div>
+        <div class="user-meta-detail">
+          <div class="user-avatar-circle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div>
+            <div class="user-meta-name" id="adminSidebarName">Vedant Raj</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 1px;" id="adminSidebarMeta">Engineering Lead</div>
+          </div>
+        </div>
       </div>
     </aside>
 
     <!-- ====================================================================
-         MAIN CONTENT AREA
+         MAIN DASHBOARD VIEWPORT (Figma 171:228)
          ==================================================================== -->
     <main class="main-content">
       
-      <!-- Top Header -->
+      <!-- Top Navigation & Breadcrumb Bar (Figma 171:229) -->
       <header class="top-header">
-        <div class="header-title">Workforce Overview</div>
+        <div class="breadcrumb-nav">
+          <span>Dashboard</span>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-active">Workforce Overview</span>
+        </div>
+
         <div class="header-right">
+          <!-- Live Telemetry Badge -->
+          <div class="live-telemetry-badge" title="Live Telemetry Ingestion Pipeline Active">
+            <span class="pulse-dot"></span>
+            <span>Live Telemetry</span>
+          </div>
+
+          <!-- Date Badge -->
           <span class="header-date" id="topHeaderDate"></span>
+
+          <!-- Role Pill -->
           <span class="header-badge" id="topHeaderBadge">Admin</span>
+
+          <!-- Quick Action -->
+          <a href="assign-task.html" class="btn btn-primary btn-sm">
+            <span>+</span> Assign Task
+          </a>
         </div>
       </header>
 
       <div class="page-body">
         
-        <!-- Page Header -->
+        <!-- Page Primary Headline (Figma 171:248) -->
         <div class="page-header-block">
-          <h1 class="page-headline">Team Workload & Capacity</h1>
-          <p class="page-subheadline">Real-time capacity signals to balance commitments across the organization.</p>
+          <div>
+            <h1 class="page-headline">Team work load and capacity</h1>
+            <p class="page-subheadline">Real-time capacity signals and telemetry-backed load balancing.</p>
+          </div>
+          <div class="page-headline-badge">
+            Engineering Squad &bull; 5 Active Pods
+          </div>
         </div>
 
-        <!-- Summary Metrics -->
+        <!-- Metric Highlight Boxes: Linear Progress Bars (Figma 171:252) -->
         <div class="metrics-row">
+          
+          <!-- Metric 1: Total Employees -->
           <div class="metric-box">
-            <div class="metric-number" id="statTotalEmployees">0</div>
-            <div class="metric-label">Employees</div>
+            <div>
+              <div class="metric-label">Total Employees</div>
+              <div class="metric-number" id="statTotalEmployees">0</div>
+            </div>
+            <div class="metric-progression">
+              <div class="progression-meta">
+                <span>Squad Allocation</span>
+                <span class="progression-meta-val">96% (24 / 25)</span>
+              </div>
+              <div class="progression-track">
+                <div class="progression-fill cyan-mint" style="width: 96%;"></div>
+              </div>
+            </div>
           </div>
+
+          <!-- Metric 2: Total Tasks / Sessions -->
           <div class="metric-box">
-            <div class="metric-number" id="statTotalSessions">0</div>
-            <div class="metric-label">Tracked Sessions</div>
+            <div>
+              <div class="metric-label">Total Active Tasks</div>
+              <div class="metric-number" id="statTotalSessions">0</div>
+            </div>
+            <div class="metric-progression">
+              <div class="progression-meta">
+                <span>Sprint Velocity Pace</span>
+                <span class="progression-meta-val">78% Completion</span>
+              </div>
+              <div class="progression-track">
+                <div class="progression-fill blue-cyan" style="width: 78%;"></div>
+              </div>
+            </div>
           </div>
+
+          <!-- Metric 3: Need Attention -->
           <div class="metric-box">
-            <div class="metric-number" style="color: #D97706;" id="statNeedAttention">0</div>
-            <div class="metric-label">Need Attention</div>
+            <div>
+              <div class="metric-label" style="color: #F59E0B;">Need Attention</div>
+              <div class="metric-number" style="color: #F59E0B;" id="statNeedAttention">0</div>
+            </div>
+            <div class="metric-progression">
+              <div class="progression-meta">
+                <span>Risk Threshold</span>
+                <span class="progression-meta-val" style="color: #EF4444;">12.5% Squad Risk</span>
+              </div>
+              <div class="progression-track">
+                <div class="progression-fill amber-coral" style="width: 28%;"></div>
+              </div>
+            </div>
           </div>
+
         </div>
 
-        <!-- Main Section: TEAM CAPACITY (Section 15) -->
+        <!-- Main Section: TEAM CAPACITY (Figma 171:152) -->
         <section class="content-card">
           <div class="card-header-bar">
-            <div>
+            <div class="card-heading-group">
               <h2 class="card-heading">Team Capacity</h2>
-              <p class="card-subheading">Who has capacity and who needs attention?</p>
+              <span class="engineers-badge">5 Active Engineers</span>
             </div>
-            <a href="assign-task.html" class="btn btn-primary btn-sm">
-              + Assign Task
-            </a>
+            
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <div style="position: relative; width: 220px;">
+                <input type="text" class="form-input" id="employeeSearchInput" placeholder="Filter squad member..." style="padding: 0.45rem 0.75rem 0.45rem 2rem; font-size: 0.8125rem;" />
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </div>
+
+              <div class="table-filter-group">
+                <button type="button" class="table-filter-btn active">All</button>
+                <button type="button" class="table-filter-btn">Overloaded</button>
+                <button type="button" class="table-filter-btn">Optimal</button>
+              </div>
+            </div>
           </div>
 
           <div class="table-wrap">
@@ -104,28 +243,31 @@
               <thead>
                 <tr>
                   <th>Employee</th>
-                  <th>Workload</th>
+                  <th>Role / Pod</th>
+                  <th>Workload (Linear)</th>
                   <th>Remaining Work</th>
                   <th>Status</th>
                   <th style="text-align: right;">Action</th>
                 </tr>
               </thead>
               <tbody id="teamCapacityTableBody">
-                <!-- Populated via JS -->
+                <!-- Populated dynamically via JS -->
               </tbody>
             </table>
           </div>
+
+          <div class="card-table-footer">
+            <span>Showing squad engineers across all branches</span>
+            <a href="#employeesSection">View all roster profiles &rarr;</a>
+          </div>
         </section>
 
-        <!-- EMPLOYEES ROSTER SECTION (Section 16) -->
+        <!-- EMPLOYEES ROSTER SECTION -->
         <section class="content-card" id="employeesSection">
           <div class="card-header-bar">
             <div>
-              <h2 class="card-heading">Employees</h2>
-              <p class="card-subheading">Click on any employee to open their detailed profile, Work Pulse, and activity breakdown.</p>
-            </div>
-            <div style="width: 240px;">
-              <input type="text" class="form-input" id="employeeSearchInput" placeholder="Search employees..." style="padding: 0.4rem 0.65rem; font-size: 0.8125rem;" />
+              <h2 class="card-heading">Organization Roster</h2>
+              <p class="card-subheading">Comprehensive staff overview and individual work pulses.</p>
             </div>
           </div>
 
@@ -143,58 +285,121 @@
                 </tr>
               </thead>
               <tbody id="employeesRosterTableBody">
-                <!-- Populated via JS -->
+                <!-- Populated dynamically via JS -->
               </tbody>
             </table>
           </div>
         </section>
 
-        <!-- RECENT COMPLETED TASKS (Shows completed task with recorded time taken) -->
-        <section class="content-card">
-          <div class="card-header-bar">
-            <div>
-              <h2 class="card-heading">Completed Tasks Log</h2>
-              <p class="card-subheading">Recorded completion records and actual delivery duration.</p>
+        <!-- BOTTOM GRID ROW (Figma 171:152) -->
+        <div class="bottom-grid-row">
+          
+          <!-- WORKLOAD DISTRIBUTION & HEALTH -->
+          <section class="content-card">
+            <div class="card-header-bar">
+              <div>
+                <h2 class="card-heading">Workload Distribution &amp; Health</h2>
+                <p class="card-subheading">Total active contributors capacity allocation</p>
+              </div>
+              <span class="status-pill low">92% Health Index</span>
             </div>
-          </div>
 
-          <div class="table-wrap">
-            <table class="clean-table">
-              <thead>
-                <tr>
-                  <th>Task Name</th>
-                  <th>Completed By</th>
-                  <th>Completed At</th>
-                  <th>Time Taken</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="completedTasksTableBody">
-                <!-- Populated via JS -->
-              </tbody>
-            </table>
-          </div>
-        </section>
+            <div class="card-body-block">
+              <div class="health-bar-container">
+                <div class="health-bar-track">
+                  <div class="health-bar-segment cyan" style="width: 75%;" title="75% Balanced"></div>
+                  <div class="health-bar-segment coral" style="width: 12.5%;" title="12.5% Overloaded"></div>
+                  <div class="health-bar-segment mint" style="width: 12.5%;" title="12.5% Available"></div>
+                </div>
+
+                <div class="health-legend">
+                  <div class="health-legend-item">
+                    <span class="health-legend-dot" style="background-color: #06B6D4;"></span>
+                    <span>18 Balanced (75%)</span>
+                  </div>
+                  <div class="health-legend-item">
+                    <span class="health-legend-dot" style="background-color: #EF4444;"></span>
+                    <span>3 Overloaded (12.5%)</span>
+                  </div>
+                  <div class="health-legend-item">
+                    <span class="health-legend-dot" style="background-color: #10B981;"></span>
+                    <span>3 Available (12.5%)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="recommendation-action-banner">
+                <div class="recommendation-action-text">
+                  <span class="recommendation-action-label">Recommended action:</span>
+                  Shift 2 PR reviews from Alex Johnson to Marcus Vance
+                </div>
+                <a href="assign-task.html" class="btn btn-secondary btn-sm" style="font-size: 0.75rem; padding: 4px 10px;">
+                  Apply
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <!-- RECENTLY COMPLETED TASKS LOG -->
+          <section class="content-card">
+            <div class="card-header-bar">
+              <div>
+                <h2 class="card-heading">Recently Completed Tasks Log</h2>
+                <p class="card-subheading">Verified completion records and delivery telemetry.</p>
+              </div>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">Last 12 hours</span>
+            </div>
+
+            <div class="table-wrap">
+              <table class="clean-table">
+                <thead>
+                  <tr>
+                    <th>Task Name</th>
+                    <th>Completed By</th>
+                    <th>Completed At</th>
+                    <th>Time Taken</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="completedTasksTableBody">
+                  <!-- Populated dynamically via JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card-table-footer">
+              <span style="display: flex; align-items: center; gap: 0.4rem; color: var(--text-muted); font-size: 0.75rem;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                Synchronized with Tick Core Pipeline
+              </span>
+              <span style="color: #34D399; font-family: var(--font-mono); font-size: 0.75rem;">All 38 build steps green</span>
+            </div>
+          </section>
+
+        </div>
 
       </div>
     </main>
   </div>
 
-  <!-- Delete Employee Account Confirmation Modal -->
+  <!-- Delete Employee Account Confirmation Modal (Dark Obsidian) -->
   <div class="modal-backdrop" id="deleteConfirmModal">
     <div class="modal-dialog" style="max-width: 480px;">
-      <div class="modal-header" style="border-bottom-color: #FEE2E2; background: #FEF2F2;">
-        <div class="modal-title" style="color: #B91C1C;">
-          <span>⚠️</span> Confirm Permanent Deletion
+      <div class="modal-header" style="border-bottom-color: rgba(239, 68, 68, 0.25); background: rgba(239, 68, 68, 0.08);">
+        <div class="modal-title" style="color: #F87171; display: flex; align-items: center; gap: 0.5rem;">
+          <span>&#9888;</span> Confirm Permanent Deletion
         </div>
         <button type="button" class="modal-close" id="closeDeleteModalBtn">&times;</button>
       </div>
       <div class="modal-body">
-        <p style="font-size: 0.95rem; color: #111827; margin-bottom: 0.75rem;">
-          Are you sure you want to permanently delete <strong id="deleteModalEmpName">this employee</strong>'s account?
+        <p style="font-size: 0.95rem; color: var(--text-primary); margin-bottom: 0.85rem;">
+          Are you sure you want to permanently delete <strong id="deleteModalEmpName" style="color: #38BDF8;">this employee</strong>'s account?
         </p>
-        <div style="background: #FFFBEB; border: 1px solid #FCD34D; border-radius: 6px; padding: 0.75rem; color: #92400E; font-size: 0.8125rem; line-height: 1.5;">
-          <strong>⚠️ Warning: This action is irreversible.</strong> All recorded activity telemetry, work sessions, task history, and account data will be permanently deleted from the system.
+        <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: var(--radius-sm); padding: 0.85rem; color: #FBBF24; font-size: 0.8125rem; line-height: 1.5;">
+          <strong>Warning: This action is irreversible.</strong> All recorded activity telemetry, work sessions, task history, and credentials will be permanently removed.
         </div>
       </div>
       <div class="modal-footer">
@@ -204,6 +409,8 @@
     </div>
   </div>
 
+  <!-- Scripts -->
+  <script src="js/sidebar.js"></script>
   <script src="js/dashboard.js"></script>
 </body>
 </html>

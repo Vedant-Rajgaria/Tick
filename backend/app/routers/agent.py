@@ -217,6 +217,10 @@ def ingest_activity_batch(
         context_switch_count += 1
 
     input_activity = payload["input_activity"]
+    focus_score = input_activity.get("focus_score", payload.get("focus_score"))
+    camera_active = input_activity.get("camera_active", payload.get("camera_active", False))
+    eye_z_score = input_activity.get("eye_z_score", payload.get("eye_z_score"))
+
     db.add(
         InputActivityWindow(
             user_id=current_user.id,
@@ -227,6 +231,9 @@ def ingest_activity_batch(
             mouse_event_count=input_activity["mouse_event_count"],
             active_seconds=input_activity["active_seconds"],
             idle_seconds=input_activity["idle_seconds"],
+            focus_score=focus_score,
+            camera_active=camera_active,
+            eye_z_score=eye_z_score,
         )
     )
 

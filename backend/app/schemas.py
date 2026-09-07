@@ -115,6 +115,16 @@ class HourlyActivityPoint(BaseModel):
     intensityPercent: float
 
 
+class InputActivityPayload(BaseModel):
+    keystroke_count: int = 0
+    mouse_event_count: int = 0
+    active_seconds: int = 0
+    idle_seconds: int = 0
+    focus_score: float | None = None
+    camera_active: bool | None = False
+    eye_z_score: float | None = None
+
+
 class EmployeeDashboardResponse(BaseModel):
     workPulse: list[WorkPulseSegment]
     applications: list[AppUsageItem]
@@ -122,6 +132,8 @@ class EmployeeDashboardResponse(BaseModel):
     activeSeconds: int = 0
     idleSeconds: int = 0
     sessionCount: int = 0
+    focusScore: float | None = None
+    cameraActive: bool = False
 
 
 # ---------------------------------------------------------------------------

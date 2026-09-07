@@ -111,7 +111,10 @@ CREATE TABLE input_activity_windows (
   keystroke_count     INTEGER NOT NULL DEFAULT 0,
   mouse_event_count   INTEGER NOT NULL DEFAULT 0,
   active_seconds      INTEGER NOT NULL DEFAULT 0,
-  idle_seconds        INTEGER NOT NULL DEFAULT 0
+  idle_seconds        INTEGER NOT NULL DEFAULT 0,
+  focus_score         NUMERIC(5,2),
+  camera_active       BOOLEAN DEFAULT FALSE,
+  eye_z_score         NUMERIC(5,2)
 );
 
 CREATE TABLE tasks (

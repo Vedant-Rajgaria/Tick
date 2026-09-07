@@ -74,6 +74,27 @@ def validate_activity_batch_domain(payload: dict) -> list[str]:
             f"exceeds batch duration ({batch_duration}s)"
         )
 
+    # Eye tracking domain checks (optional)
+    focus_score = input_act.get("focus_score", payload.get("focus_score"))
+    if focus_score is not None:
+        try:
+            f_val = float(focus_score)
+            if not (0.0 <= f_val <= 100.0):
+                errors.append(f"Domain error: focus_score ({focus_score}) must be within [0.0, 100.0]")
+        except (ValueError, TypeError):
+            errors.append(f"Domain error: focus_score ({focus_score}) must be a valid number")
+
+    cam_active = input_act.get("camera_active", payload.get("camera_active"))
+    if cam_active is not None and not isinstance(cam_active, bool):
+        errors.append(f"Domain error: camera_active ({cam_active}) must be a boolean")
+
+    eye_z = input_act.get("eye_z_score", payload.get("eye_z_score"))
+    if eye_z is not None:
+        try:
+            float(eye_z)
+        except (ValueError, TypeError):
+            errors.append(f"Domain error: eye_z_score ({eye_z}) must be a valid number")
+
     # 3. Context switches
     switches = payload.get("context_switches", {})
     events = switches.get("events", [])

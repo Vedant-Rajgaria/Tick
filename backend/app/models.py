@@ -164,6 +164,9 @@ class InputActivityWindow(Base):
     mouse_event_count: Mapped[int] = mapped_column(Integer, default=0)
     active_seconds: Mapped[int] = mapped_column(Integer, default=0)
     idle_seconds: Mapped[int] = mapped_column(Integer, default=0)
+    focus_score: Mapped[float | None] = mapped_column(Numeric(5, 2), nullable=True)
+    camera_active: Mapped[bool | None] = mapped_column(Boolean, default=False, nullable=True)
+    eye_z_score: Mapped[float | None] = mapped_column(Numeric(5, 2), nullable=True)
 
 
 class Task(Base):

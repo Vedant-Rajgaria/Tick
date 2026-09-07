@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assign Task — TICK</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-mark">T</div>
+        <span class="brand-title">TICK</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link">
+          <span>Overview</span>
+        </a>
+        <a href="index.html#employeesSection" class="nav-link">
+          <span>Employees</span>
+        </a>
+        <a href="assign-task.html" class="nav-link active">
+          <span>Assign Task</span>
+        </a>
+        <a href="add-employee.html" class="nav-link">
+          <span>Add Employee</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <div style="padding: 0.35rem 0.75rem; font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">
+          System
+        </div>
+        <a href="login.html" class="nav-link" id="logoutLink" style="color: #6B7280;">
+          <span>Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-meta-role" id="adminSidebarRole">Admin Workspace</div>
+        <div class="user-meta-name" id="adminSidebarName">Loading...</div>
+        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;" id="adminSidebarMeta"></div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="top-header">
+        <div class="header-title">Smart Task Assignment</div>
+        <div class="header-right">
+          <span class="header-date" id="topHeaderDate"></span>
+          <span class="header-badge">Decision Support</span>
+        </div>
+      </header>
+
+      <div class="page-body">
+        
+        <div class="page-header-block">
+          <h1 class="page-headline">Assign Task</h1>
+          <p class="page-subheadline">Specify task requirements and let TICK evaluate team capacity and skill alignment.</p>
+        </div>
+
+        <!-- TWO COLUMN WORKSPACE: FORM ON LEFT, RECOMMENDATION ON RIGHT -->
+        <div style="display: grid; grid-template-columns: 1fr 1.25fr; gap: 2rem; align-items: flex-start;">
+          
+          <!-- STEP 1: TASK FORM (Section 24) -->
+          <div class="content-card" style="margin-bottom: 0;">
+            <div class="card-header-bar">
+              <div>
+                <h2 class="card-heading">Step 1: What needs to be done?</h2>
+                <p class="card-subheading">Define the requirements before assigning to any individual.</p>
+              </div>
+            </div>
+
+            <div class="card-body-block">
+              <form id="assignTaskForm" onsubmit="return false;">
+                <div class="form-group">
+                  <label class="form-label" for="taskNameInput">Task Name</label>
+                  <input type="text" class="form-input" id="taskNameInput" placeholder="e.g. Build Payment API" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="taskSkillsInput">Required Skills (comma-separated)</label>
+                  <input type="text" class="form-input" id="taskSkillsInput" placeholder="e.g. Python, FastAPI, PostgreSQL" />
+                  <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem;" id="quickSkillTags">
+                    <span class="skill-tag-pill" data-skill="Python" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ Python</span>
+                    <span class="skill-tag-pill" data-skill="FastAPI" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ FastAPI</span>
+                    <span class="skill-tag-pill" data-skill="PostgreSQL" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ PostgreSQL</span>
+                    <span class="skill-tag-pill" data-skill="Docker" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ Docker</span>
+                    <span class="skill-tag-pill" data-skill="UI Design" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ UI Design</span>
+                    <span class="skill-tag-pill" data-skill="Testing" style="font-size: 0.72rem; padding: 2px 8px; background: #EEF2FF; color: #4F46E5; border-radius: 12px; cursor: pointer; border: 1px solid #C7D2FE;">+ Testing</span>
+                  </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                  <div class="form-group">
+                    <label class="form-label" for="taskTypeSelect">Task Type</label>
+                    <select class="form-select" id="taskTypeSelect">
+                      <option value="Development" selected>Development</option>
+                      <option value="Design">Design</option>
+                      <option value="Testing">Testing</option>
+                      <option value="Infrastructure">Infrastructure</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="taskPrioritySelect">Priority</label>
+                    <select class="form-select" id="taskPrioritySelect">
+                      <option value="High" selected>High</option>
+                      <option value="Critical">Critical</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Low">Low</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                  <div class="form-group">
+                    <label class="form-label" for="taskDeadlineInput">Deadline</label>
+                    <input type="date" class="form-input" id="taskDeadlineInput" />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="taskEstTimeInput">Estimated Hours</label>
+                    <input type="number" step="0.5" min="1" max="100" class="form-input" id="taskEstTimeInput" placeholder="e.g. 8" value="8" required />
+                  </div>
+                </div>
+
+                <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #E5E7EB;">
+                  <button type="button" class="btn btn-primary" id="findBestFitBtn" style="width: 100%; padding: 0.75rem; font-size: 0.95rem;">
+                    FIND BEST FIT →
+                  </button>
+                  <div style="font-size: 0.75rem; color: #6B7280; text-align: center; margin-top: 0.5rem;">
+                    The system recommends. You make the final decision.
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- STEP 2: RECOMMENDATION CONTAINER (Sections 25, 26, 27) -->
+          <div id="recommendationPanel">
+            <!-- Initial Empty State -->
+            <div class="content-card" style="margin-bottom: 0;">
+              <div class="card-header-bar">
+                <h2 class="card-heading">Step 2: Recommendation & Capacity</h2>
+              </div>
+              <div class="card-body-block" style="text-align: center; padding: 4rem 1.5rem; color: #6B7280;" id="recPlaceholder">
+                <div style="font-weight: 600; color: #374151; margin-bottom: 0.25rem; font-size: 1rem;">
+                  Awaiting Task Evaluation
+                </div>
+                <p style="font-size: 0.8125rem; max-width: 320px; margin: 0 auto; color: #9CA3AF;">
+                  Fill in the task details on the left and click <strong>"FIND BEST FIT →"</strong> to evaluate available capacity and skill alignment.
+                </p>
+              </div>
+
+              <!-- Subtle Loader (Short & Clean) -->
+              <div class="subtle-loader" id="recLoader" style="display: none;">
+                <div class="loader-spinner"></div>
+                <span id="loaderMessage">Analyzing team capacity...</span>
+              </div>
+
+              <!-- Recommendation Result Container -->
+              <div id="recResultsContent" style="display: none; padding: 1.5rem;">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/recommendations.js"></script>
+</body>
+</html>

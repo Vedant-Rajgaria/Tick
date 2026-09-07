@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — TICK</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body style="background-color: #F9FAFB;">
+  <main class="welcome-container">
+    <div class="auth-box">
+      <!-- Minimalist Brand Header -->
+      <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+        <div class="brand-mark">T</div>
+        <span class="brand-title" style="font-size: 1.15rem; letter-spacing: 0.06em;">TICK</span>
+      </div>
+
+      <h1 style="font-size: 1.35rem; font-weight: 700; color: #111827; text-align: center; margin-bottom: 1rem;" id="authTitle">
+        Admin Login
+      </h1>
+
+      <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.25rem; font-size: 0.8125rem;">
+        <button type="button" id="tabLogin" style="background: none; border: none; font-weight: 600; color: #2563EB; cursor: pointer; border-bottom: 2px solid #2563EB; padding-bottom: 4px;">
+          Sign In
+        </button>
+        <button type="button" id="tabRegister" style="background: none; border: none; font-weight: 500; color: #6B7280; cursor: pointer; border-bottom: 2px solid transparent; padding-bottom: 4px;">
+          Create Admin Profile
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label class="form-label" for="adminEmail">Email</label>
+          <input type="email" class="form-input" id="adminEmail" placeholder="admin@example.com" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="adminPassword">Password</label>
+          <input type="password" class="form-input" id="adminPassword" placeholder="Enter password" required />
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <button type="submit" class="btn btn-primary w-full" style="width: 100%; padding: 0.65rem;">
+            Login
+          </button>
+        </div>
+
+        <div id="loginErrorMsg" style="display: none; margin-top: 1rem; padding: 0.75rem 1rem; background-color: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 6px; font-size: 0.8125rem; color: #B91C1C; font-weight: 500; text-align: center;"></div>
+      </form>
+
+      <!-- Register Form -->
+      <form id="adminRegisterForm" style="display: none;">
+        <div class="form-group">
+          <label class="form-label" for="regOrgName">Organization Name</label>
+          <input type="text" class="form-input" id="regOrgName" placeholder="e.g. Acme Corp" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regAdminName">Admin Full Name</label>
+          <input type="text" class="form-input" id="regAdminName" placeholder="e.g. Jane Doe" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regEmail">Email</label>
+          <input type="email" class="form-input" id="regEmail" placeholder="e.g. admin@acme.test" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regPassword">Password</label>
+          <input type="password" class="form-input" id="regPassword" placeholder="Create password" required />
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <button type="submit" class="btn btn-primary w-full" style="width: 100%; padding: 0.65rem; background-color: #059669;">
+            Create Admin & Organization
+          </button>
+        </div>
+      </form>
+
+      <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #E5E7EB;">
+        <a href="../index.html" style="font-size: 0.8125rem; color: #4B5563; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+          ← Back to TICK
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/login.js"></script>
+</body>
+</html>

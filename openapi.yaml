@@ -1,0 +1,511 @@
+openapi: 3.1.0
+info:
+  title: TIC API
+  version: "0.1.0-mvp"
+  description: >
+    Contract for the TIC MVP backend. Enum values in this file must match
+    shared/constants.json exactly — see docs/CONTRACT_CHANGE_PROCESS.md
+    before editing either file.
+servers:
+  - url: /api/v1
+
+paths:
+  /auth/login:
+    post:
+      summary: Authenticate a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string }
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/LoginResponse" }
+
+  /auth/refresh:
+    post:
+      summary: Exchange a refresh token for a new access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refresh_token]
+              properties:
+                refresh_token: { type: string }
+      responses:
+        "200":
+          description: New access token issued
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [access_token]
+                properties:
+                  access_token: { type: string }
+        "401":
+          description: Refresh token invalid or expired
+
+  /auth/register:
+    post:
+      summary: First-admin signup — always creates a brand-new organization and an ADMIN user in it
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [org_name, name, email, password]
+              properties:
+                org_name: { type: string }
+                name: { type: string }
+                email: { type: string, format: email }
+                password: { type: string }
+      responses:
+        "201":
+          description: Organization + admin created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/LoginResponse" }
+        "409":
+          description: Email already registered
+
+  /admin/employees:
+    post:
+      summary: Admin/manager creates an employee in their own organization
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password, department]
+              properties:
+                name: { type: string }
+                email: { type: string, format: email }
+                password: { type: string }
+                department: { type: string }
+      responses:
+        "201":
+          description: Employee created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: integer }
+                  name: { type: string }
+                  email: { type: string }
+                  department: { type: string }
+                  role: { type: string, enum: [EMPLOYEE] }
+        "409":
+          description: Email already registered
+
+  /agent/register:
+    post:
+      summary: Register a desktop agent/device for the authenticated employee
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [device_name, os, agent_version]
+              properties:
+                device_name: { type: string }
+                os: { type: string, enum: [WINDOWS, MACOS, LINUX] }
+                agent_version: { type: string }
+      responses:
+        "200":
+          description: Device registered
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [device_id, status]
+                properties:
+                  device_id: { type: integer }
+                  status: { type: string }
+
+  /activity/batch:
+    post:
+      summary: Ingest an aggregated activity batch from the desktop agent
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "./backend/app/schemas/activity_batch.schema.json"
+      responses:
+        "200":
+          description: Batch accepted
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ActivityBatchResponse" }
+        "422":
+          description: Batch failed schema validation
+
+  /employee/me/dashboard:
+    get:
+      summary: Current employee's dashboard summary
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/EmployeeDashboard" }
+
+  /employee/me/metrics:
+    get:
+      summary: Daily metrics over a date range
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: from
+          in: query
+          required: true
+          schema: { type: string, format: date }
+        - name: to
+          in: query
+          required: true
+          schema: { type: string, format: date }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/DailyMetric" }
+
+  /employee/me/tasks:
+    get:
+      summary: Current employee's tasks
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Task" }
+
+  /employee/me/context-switches:
+    get:
+      summary: App/tab switch events over a date range
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: from
+          in: query
+          required: true
+          schema: { type: string, format: date }
+        - name: to
+          in: query
+          required: true
+          schema: { type: string, format: date }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/ContextSwitchEvent" }
+
+  /tasks:
+    post:
+      summary: Create a task
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TaskCreateRequest" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id: { type: integer }
+                  status: { type: string, enum: [TODO] }
+
+  /tasks/{task_id}:
+    patch:
+      summary: Update a task
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema: { type: integer }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [TODO, IN_PROGRESS, COMPLETED, BLOCKED, OVERDUE]
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Task" }
+
+  /tasks/{task_id}/recommendations:
+    get:
+      summary: Recommended employees for a task
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/RecommendationsResponse" }
+
+  /manager/team:
+    get:
+      summary: Team activity overview, derived from real collected activity data
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  members:
+                    type: array
+                    items: { $ref: "#/components/schemas/TeamOverviewEntry" }
+
+  /manager/employees/{employee_id}:
+    get:
+      summary: Single employee detail view for a manager, optionally filtered to one UTC calendar day
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: employee_id
+          in: path
+          required: true
+          schema: { type: integer }
+        - name: date
+          in: query
+          required: false
+          schema: { type: string, format: date }
+          description: Filter to a single UTC calendar day. Omit for all-time.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/EmployeeDetail" }
+        "404":
+          description: Employee not found (or belongs to a different organization)
+
+  /manager/workload:
+    get:
+      summary: Workload categorization across the team
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/WorkloadEntry" }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    LoginResponse:
+      type: object
+      required: [access_token, refresh_token, user]
+      properties:
+        access_token: { type: string }
+        refresh_token: { type: string }
+        user:
+          type: object
+          properties:
+            id: { type: integer }
+            name: { type: string }
+            role: { type: string, enum: [EMPLOYEE, MANAGER, ADMIN] }
+
+    ActivityBatchResponse:
+      type: object
+      required: [status, batch_id]
+      properties:
+        status: { type: string, enum: [accepted] }
+        batch_id: { type: string }
+        processed:
+          type: object
+          properties:
+            application_sessions: { type: integer }
+            browser_tab_sessions: { type: integer }
+            context_switches: { type: integer }
+
+    EmployeeDashboard:
+      type: object
+      description: >
+        Reconciled with the actually-implemented response shape of
+        GET /employee/me/dashboard and GET /manager/employees/{id} (previous
+        versions of this schema described aggregate fields — active_time,
+        workload_percentage, etc. — that the endpoint never actually
+        returned; see docs/CONTRACT_CHANGE_PROCESS.md).
+      properties:
+        workPulse:
+          type: array
+          items:
+            type: object
+            properties:
+              app: { type: string }
+              start: { type: string }
+              end: { type: string }
+              duration: { type: string }
+              type: { type: string }
+              width: { type: string }
+        applications:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              duration: { type: string }
+              category: { type: string }
+              lastActive: { type: string }
+        hourlyActivity:
+          type: array
+          items:
+            type: object
+            properties:
+              hour: { type: string }
+              intensityPercent: { type: number }
+        activeSeconds: { type: integer }
+        idleSeconds: { type: integer }
+        sessionCount: { type: integer }
+
+    DailyMetric:
+      type: object
+      properties:
+        date: { type: string, format: date }
+        active_seconds: { type: integer }
+        idle_seconds: { type: integer }
+        app_switch_count: { type: integer }
+        tab_switch_count: { type: integer }
+        keystroke_count: { type: integer }
+        mouse_event_count: { type: integer }
+        avg_cpu_percent: { type: number }
+        avg_gpu_percent: { type: number }
+        session_count: { type: integer }
+        tasks_completed: { type: integer }
+
+    Task:
+      type: object
+      properties:
+        id: { type: integer }
+        title: { type: string }
+        description: { type: string }
+        status: { type: string, enum: [TODO, IN_PROGRESS, COMPLETED, BLOCKED, OVERDUE] }
+        priority: { type: string, enum: [LOW, MEDIUM, HIGH, CRITICAL] }
+        complexity: { type: string, enum: [LOW, MEDIUM, HIGH] }
+        estimated_hours: { type: number }
+        actual_hours: { type: number }
+        deadline: { type: string, format: date }
+
+    TaskCreateRequest:
+      type: object
+      required: [title, estimated_hours]
+      properties:
+        title: { type: string }
+        description: { type: string }
+        assigned_to: { type: [integer, "null"] }
+        estimated_hours: { type: number }
+        complexity: { type: string, enum: [LOW, MEDIUM, HIGH] }
+        priority: { type: string, enum: [LOW, MEDIUM, HIGH, CRITICAL] }
+        deadline: { type: string, format: date }
+
+    ContextSwitchEvent:
+      type: object
+      properties:
+        switch_type: { type: string, enum: [APP, TAB] }
+        from_context: { type: string }
+        to_context: { type: string }
+        timestamp: { type: string, format: date-time }
+
+    RecommendationsResponse:
+      type: object
+      properties:
+        task_id: { type: integer }
+        recommendations:
+          type: array
+          items:
+            type: object
+            properties:
+              employee_id: { type: integer }
+              score: { type: number }
+              skill_score: { type: number }
+              availability_score: { type: number }
+              efficiency_score: { type: number }
+              workload_score: { type: number }
+
+    TeamOverviewEntry:
+      type: object
+      description: >
+        Real, derived-from-activity-data team summary. Does NOT include
+        task-based workload_percentage — that requires task estimated_hours
+        vs. capacity, which is out of scope for this pass.
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        role: { type: string }
+        department: { type: string }
+        activeTime: { type: string }
+        sessionCount: { type: integer }
+        topApp: { type: [string, "null"] }
+        lastActive: { type: string }
+
+    EmployeeDetail:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        role: { type: string }
+        department: { type: string }
+        status: { type: string }
+        dashboard: { $ref: "#/components/schemas/EmployeeDashboard" }
+
+    WorkloadEntry:
+      type: object
+      properties:
+        employee_id: { type: integer }
+        workload_percentage: { type: number }
+        category: { type: string, enum: [LOW, NORMAL, HIGH, OVERLOADED] }

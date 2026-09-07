@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workforce Overview — TICK</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- ====================================================================
+         ADMIN SIDEBAR
+         ==================================================================== -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-mark">T</div>
+        <span class="brand-title">TICK</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link active">
+          <span>Overview</span>
+        </a>
+        <a href="#employeesSection" class="nav-link" id="navEmployeesLink">
+          <span>Employees</span>
+        </a>
+        <a href="assign-task.html" class="nav-link">
+          <span>Assign Task</span>
+        </a>
+        <a href="add-employee.html" class="nav-link">
+          <span>Add Employee</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <div style="padding: 0.35rem 0.75rem; font-size: 0.75rem; color: #9CA3AF; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em;">
+          System
+        </div>
+        <a href="login.html" class="nav-link" id="logoutLink" style="color: #6B7280;">
+          <span>Logout</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-meta-role" id="adminSidebarRole">Admin Workspace</div>
+        <div class="user-meta-name" id="adminSidebarName">Loading...</div>
+        <div style="font-size: 0.75rem; color: #6B7280; margin-top: 2px;" id="adminSidebarMeta"></div>
+      </div>
+    </aside>
+
+    <!-- ====================================================================
+         MAIN CONTENT AREA
+         ==================================================================== -->
+    <main class="main-content">
+      
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-title">Workforce Overview</div>
+        <div class="header-right">
+          <span class="header-date" id="topHeaderDate"></span>
+          <span class="header-badge" id="topHeaderBadge">Admin</span>
+        </div>
+      </header>
+
+      <div class="page-body">
+        
+        <!-- Page Header -->
+        <div class="page-header-block">
+          <h1 class="page-headline">Team Workload & Capacity</h1>
+          <p class="page-subheadline">Real-time capacity signals to balance commitments across the organization.</p>
+        </div>
+
+        <!-- Summary Metrics -->
+        <div class="metrics-row">
+          <div class="metric-box">
+            <div class="metric-number" id="statTotalEmployees">0</div>
+            <div class="metric-label">Employees</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-number" id="statTotalSessions">0</div>
+            <div class="metric-label">Tracked Sessions</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-number" style="color: #D97706;" id="statNeedAttention">0</div>
+            <div class="metric-label">Need Attention</div>
+          </div>
+        </div>
+
+        <!-- Main Section: TEAM CAPACITY (Section 15) -->
+        <section class="content-card">
+          <div class="card-header-bar">
+            <div>
+              <h2 class="card-heading">Team Capacity</h2>
+              <p class="card-subheading">Who has capacity and who needs attention?</p>
+            </div>
+            <a href="assign-task.html" class="btn btn-primary btn-sm">
+              + Assign Task
+            </a>
+          </div>
+
+          <div class="table-wrap">
+            <table class="clean-table">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Workload</th>
+                  <th>Remaining Work</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="teamCapacityTableBody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- EMPLOYEES ROSTER SECTION (Section 16) -->
+        <section class="content-card" id="employeesSection">
+          <div class="card-header-bar">
+            <div>
+              <h2 class="card-heading">Employees</h2>
+              <p class="card-subheading">Click on any employee to open their detailed profile, Work Pulse, and activity breakdown.</p>
+            </div>
+            <div style="width: 240px;">
+              <input type="text" class="form-input" id="employeeSearchInput" placeholder="Search employees..." style="padding: 0.4rem 0.65rem; font-size: 0.8125rem;" />
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="clean-table">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Role</th>
+                  <th>Department</th>
+                  <th>Workload</th>
+                  <th>Sessions</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="employeesRosterTableBody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- RECENT COMPLETED TASKS (Shows completed task with recorded time taken) -->
+        <section class="content-card">
+          <div class="card-header-bar">
+            <div>
+              <h2 class="card-heading">Completed Tasks Log</h2>
+              <p class="card-subheading">Recorded completion records and actual delivery duration.</p>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table class="clean-table">
+              <thead>
+                <tr>
+                  <th>Task Name</th>
+                  <th>Completed By</th>
+                  <th>Completed At</th>
+                  <th>Time Taken</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="completedTasksTableBody">
+                <!-- Populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Delete Employee Account Confirmation Modal -->
+  <div class="modal-backdrop" id="deleteConfirmModal">
+    <div class="modal-dialog" style="max-width: 480px;">
+      <div class="modal-header" style="border-bottom-color: #FEE2E2; background: #FEF2F2;">
+        <div class="modal-title" style="color: #B91C1C;">
+          <span>⚠️</span> Confirm Permanent Deletion
+        </div>
+        <button type="button" class="modal-close" id="closeDeleteModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.95rem; color: #111827; margin-bottom: 0.75rem;">
+          Are you sure you want to permanently delete <strong id="deleteModalEmpName">this employee</strong>'s account?
+        </p>
+        <div style="background: #FFFBEB; border: 1px solid #FCD34D; border-radius: 6px; padding: 0.75rem; color: #92400E; font-size: 0.8125rem; line-height: 1.5;">
+          <strong>⚠️ Warning: This action is irreversible.</strong> All recorded activity telemetry, work sessions, task history, and account data will be permanently deleted from the system.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" id="cancelDeleteBtn">Cancel</button>
+        <button type="button" class="btn btn-danger btn-sm" id="confirmDeleteBtn">Yes, Delete Account Permanently</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
